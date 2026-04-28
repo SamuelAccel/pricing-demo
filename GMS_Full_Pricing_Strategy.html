@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AcceleratorApp GMS — Full Pricing Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#FAFAF8;--card:#FFF;--surface:#F3F2EE;--surface2:#ECEAE4;
+--t1:#1A1A18;--t2:#6B6B65;--t3:#9C9C95;--t4:#BFBFB8;
+--brd:rgba(0,0,0,.08);--brd2:rgba(0,0,0,.14);
+--accent:#1D4ED8;--accent-bg:#EFF4FF;
+--green:#0F766E;--green-bg:#ECFDF5;
+--purple:#6D28D9;--purple-bg:#F5F3FF;
+--coral:#C2410C;--coral-bg:#FFF7ED;
+--amber:#92400E;--amber-bg:#FFFBEB;
+--red:#B91C1C;--red-bg:#FEF2F2;
+--r:10px;--rl:14px;
+--sans:'DM Sans',sans-serif;--display:'Fraunces',Georgia,serif;
+}
+@media(prefers-color-scheme:dark){:root{
+--bg:#121210;--card:#1C1C19;--surface:#242420;--surface2:#2E2E2A;
+--t1:#EDEDE8;--t2:#9C9C95;--t3:#6B6B65;--t4:#444441;
+--brd:rgba(255,255,255,.08);--brd2:rgba(255,255,255,.14);
+--accent:#6B9AFF;--accent-bg:rgba(107,154,255,.1);
+--green-bg:rgba(15,118,110,.1);--green:#5EEAD4;
+--purple-bg:rgba(109,40,217,.1);--purple:#C4B5FD;
+--coral-bg:rgba(194,65,12,.1);--coral:#FDBA74;
+--amber-bg:rgba(146,64,14,.1);--amber:#FCD34D;
+--red-bg:rgba(185,28,28,.1);--red:#FCA5A5;
+}}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 28px 80px}
+h1{font-family:var(--display);font-size:30px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}
+h2{font-family:var(--display);font-size:22px;font-weight:600;letter-spacing:-.01em;margin-bottom:16px}
+h3{font-size:15px;font-weight:500;margin-bottom:12px}
+.sub{color:var(--t2);font-size:14px;margin-bottom:32px}
+.tabs{display:flex;gap:4px;padding:4px;border-radius:var(--r);background:var(--surface);width:fit-content;margin-bottom:32px}
+.tab{padding:9px 22px;border:none;border-radius:7px;font-family:var(--sans);font-size:13px;cursor:pointer;background:transparent;color:var(--t2);transition:.2s}
+.tab.on{background:var(--card);color:var(--t1);font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.view{display:none}.view.on{display:block}
+.note{background:var(--surface);border-radius:var(--r);padding:14px 18px;font-size:13px;color:var(--t2);line-height:1.65;margin-bottom:24px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.card{background:var(--card);border:.5px solid var(--brd);border-radius:var(--rl);padding:22px 20px}
+.card.pop{border:2px solid var(--accent);position:relative}
+.card.pop .badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--accent-bg);color:var(--accent);font-size:11px;padding:3px 14px;border-radius:0 0 var(--r) var(--r);font-weight:500}
+.card.top-gray{border-top:3px solid var(--t3);border-top-left-radius:0;border-top-right-radius:0}
+.card.top-purple{border-top:3px solid var(--purple);border-top-left-radius:0;border-top-right-radius:0}
+.card.top-green{border-top:3px solid var(--green);border-top-left-radius:0;border-top-right-radius:0}
+.tier-label{font-size:12px;color:var(--t2);font-weight:500;margin-bottom:10px}
+.price{font-size:28px;font-weight:500}.price-unit{font-size:13px;font-weight:400;color:var(--t2)}
+.price-sub{font-size:11px;color:var(--t3);margin-bottom:16px;margin-top:2px}
+.price-strike{font-size:12px;color:var(--t3);text-decoration:line-through;margin-right:6px}
+.discount{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500;background:var(--green-bg);color:var(--green)}
+.fl{font-size:12px;color:var(--t2);line-height:1.85}
+.fl-row{padding:5px 0;border-bottom:.5px solid var(--brd)}
+.fl-row:last-child{border-bottom:none}
+.fl-head{font-weight:500}
+.fl-section{margin-top:14px}
+.meta{margin-top:14px;padding:10px 12px;border-radius:var(--r);background:var(--surface);font-size:11px;color:var(--t2);line-height:1.55}
+.meta b{font-weight:500}
+.sep{border:none;border-top:.5px solid var(--brd);margin:36px 0}
+.scenario{margin-bottom:28px}
+.scenario-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.scenario-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.scenario-title{font-size:14px;font-weight:500}
+.scenario-desc{font-size:13px;color:var(--t2);margin-bottom:14px;margin-left:18px}
+.cost-table{width:100%;border-collapse:collapse;font-size:12px}
+.cost-table td{padding:6px 0;vertical-align:top}
+.cost-table .label{color:var(--t2);width:55%}
+.cost-table .val{text-align:right;font-variant-numeric:tabular-nums}
+.cost-table .total-row td{border-top:.5px solid var(--brd);padding-top:8px;margin-top:4px;font-weight:500;font-size:13px}
+.comp-bar{margin-bottom:20px}
+.comp-bar-label{font-size:12px;color:var(--t2);margin-bottom:4px;display:flex;justify-content:space-between}
+.comp-bar-track{height:8px;border-radius:4px;background:var(--surface);position:relative;overflow:visible}
+.comp-bar-fill{height:100%;border-radius:4px;position:absolute;left:0;top:0}
+.comp-bar-marker{position:absolute;top:-4px;width:2px;height:16px;border-radius:1px}
+.feat-table{width:100%;border-collapse:collapse;font-size:12px}
+.feat-table th{text-align:left;padding:8px 12px;font-weight:500;font-size:12px;background:var(--surface);position:sticky;top:0}
+.feat-table th:not(:first-child){text-align:center}
+.feat-table td{padding:7px 12px;border-top:.5px solid var(--brd);vertical-align:middle}
+.feat-table td:not(:first-child){text-align:center}
+.feat-table .cat{font-weight:500;background:var(--surface);font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:.04em;padding:6px 12px}
+.ck{color:var(--green);font-size:14px}.xx{color:var(--t4);font-size:12px}
+.pill{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px}
+.pill-g{background:var(--green-bg);color:var(--green)}
+.pill-p{background:var(--purple-bg);color:var(--purple)}
+.pill-c{background:var(--coral-bg);color:var(--coral)}
+.pill-a{background:var(--accent-bg);color:var(--accent)}
+@media(max-width:768px){.grid3{grid-template-columns:1fr}.grid4{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>GMS funding module — full pricing strategy</h1>
+<p class="sub">Three customer scenarios with complete feature mapping, internal AA pricing comparison, and external competitor benchmarks</p>
+
+<div class="tabs" id="tabs"></div>
+
+<!-- SCENARIO 1 -->
+<div class="view on" id="v1">
+<div class="note"><b>Scenario 1 — New customer, GMS only.</b> They don't need AcceleratorApp's accelerator modules (Community, Program, Mentoring, Online Learner, Security, White Label). They're a foundation, government agency, or organization that purely manages grants and funding programs. GMS is a standalone product.</div>
+
+<div class="grid3" style="margin-bottom:32px">
+<div class="card top-gray">
+<div class="tier-label">GMS Essentials</div>
+<div class="price">€299<span class="price-unit">/mo</span></div>
+<div class="price-sub">€3,588/yr billed annually</div>
+<div class="fl">
+<div class="fl-row fl-head">Included:</div>
+<div class="fl-row">2 admin seats</div>
+<div class="fl-row">3 funding programs</div>
+<div class="fl-row">Application intake + review</div>
+<div class="fl-row">Funding program setup + rounds</div>
+<div class="fl-row">Recipient tracking + records</div>
+<div class="fl-row">Basic disbursement tracking</div>
+<div class="fl-row">Basic compliance checks</div>
+<div class="fl-row">Basic milestone tracking</div>
+<div class="fl-row">Standard reporting dashboards</div>
+</div>
+<div class="fl fl-section">
+<div class="fl-row fl-head">Scaling:</div>
+<div class="fl-row">Extra admin seat: €59/mo</div>
+<div class="fl-row">Extra program: €79/mo</div>
+</div>
+<div class="meta"><b>AA modules NOT included.</b> This is GMS-only. Community, Mentoring, Program, Online Learner, Security, White Label can be added at Professional tier and above.</div>
+</div>
+
+<div class="card pop">
+<div class="badge">Most popular</div>
+<div class="tier-label" style="margin-top:8px">GMS Professional</div>
+<div class="price">€599<span class="price-unit">/mo</span></div>
+<div class="price-sub">€7,188/yr billed annually</div>
+<div class="fl">
+<div class="fl-row fl-head">Everything in Essentials, plus:</div>
+<div class="fl-row">5 admin seats included</div>
+<div class="fl-row">6 funding programs included</div>
+<div class="fl-row">Milestone-linked disbursements</div>
+<div class="fl-row">Multi-step approval workflows</div>
+<div class="fl-row">Evidence collection workflows</div>
+<div class="fl-row">Clarification loops</div>
+<div class="fl-row">Amendment workflows</div>
+<div class="fl-row">Management dashboards</div>
+</div>
+<div class="fl fl-section">
+<div class="fl-row fl-head">AA modules available to add:</div>
+<div class="fl-row">Community, Program, Mentoring</div>
+<div class="fl-row">Online Learner, Security, White Label</div>
+</div>
+<div class="fl fl-section">
+<div class="fl-row fl-head">Scaling:</div>
+<div class="fl-row">Extra admin seat: €59/mo</div>
+<div class="fl-row">Extra program: €79/mo</div>
+</div>
+</div>
+
+<div class="card top-green">
+<div class="tier-label">GMS Custom</div>
+<div class="price">Custom</div>
+<div class="price-sub">From €2,500/mo</div>
+<div class="fl">
+<div class="fl-row fl-head">Everything in Professional, plus:</div>
+<div class="fl-row">Seats + programs negotiated</div>
+<div class="fl-row">Advanced compliance + enforcement</div>
+<div class="fl-row">Portfolio-level reporting</div>
+<div class="fl-row">SSO / SAML</div>
+<div class="fl-row">API access</div>
+<div class="fl-row">Custom integrations (Salesforce, NetSuite)</div>
+<div class="fl-row">Data residency options</div>
+<div class="fl-row">Dedicated onboarding team</div>
+</div>
+<div class="fl fl-section">
+<div class="fl-row fl-head">AA modules available to add:</div>
+<div class="fl-row">All modules + White Label</div>
+</div>
+</div>
+</div>
+
+<h3>Full cost examples — new GMS-only customers</h3>
+<div class="grid3" style="margin-bottom:32px">
+<div class="scenario">
+<div class="scenario-head"><div class="scenario-dot" style="background:var(--t3)"></div><div class="scenario-title">Small foundation</div></div>
+<div class="scenario-desc">2 admins, 3 grants programs, basic lifecycle</div>
+<table class="cost-table">
+<tr><td class="label">GMS Essentials</td><td class="val">€299/mo</td></tr>
+<tr><td class="label">2 admin seats (included)</td><td class="val">€0</td></tr>
+<tr><td class="label">3 programs (included)</td><td class="val">€0</td></tr>
+<tr class="total-row"><td>Total</td><td class="val">€299/mo · €3,588/yr</td></tr>
+</table>
+<div class="meta"><b>vs. competitors:</b> Good Grants Intro €3,475/yr (no disbursements). Foundant GLM €3,931–€8,789/yr (2yr lock-in). WizeHive €1,295–€9,802/yr (opaque). AA offers full grant lifecycle at a competitive price with no lock-in.</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-head"><div class="scenario-dot" style="background:var(--accent)"></div><div class="scenario-title">Mid grantmaker</div></div>
+<div class="scenario-desc">7 admins, 8 programs, milestone disbursements</div>
+<table class="cost-table">
+<tr><td class="label">GMS Professional</td><td class="val">€599/mo</td></tr>
+<tr><td class="label">+2 extra admin seats</td><td class="val">€118/mo</td></tr>
+<tr><td class="label">+2 extra programs</td><td class="val">€158/mo</td></tr>
+<tr class="total-row"><td>Total</td><td class="val">€875/mo · €10,500/yr</td></tr>
+</table>
+<div class="meta"><b>vs. competitors:</b> Submittable $10K/yr (no disbursements, no milestones). Fluxx entry $13.5K/yr (module-only, +$23K implementation). SM Apply $10K/yr (failed implementation reported). AA matches Submittable's price with far more features.</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-head"><div class="scenario-dot" style="background:var(--green)"></div><div class="scenario-title">Large public-sector</div></div>
+<div class="scenario-desc">12 admins, 15 programs, SSO, API, integrations</div>
+<table class="cost-table">
+<tr><td class="label">GMS Custom (estimated)</td><td class="val">€3,500/mo</td></tr>
+<tr><td class="label">Seats + programs (negotiated)</td><td class="val">Included</td></tr>
+<tr><td class="label">Dedicated onboarding</td><td class="val">Separate SOW</td></tr>
+<tr class="total-row"><td>Total (estimated)</td><td class="val">€3,500/mo · €42,000/yr</td></tr>
+</table>
+<div class="meta"><b>vs. competitors:</b> Fluxx mid-size $36.5K–$267K/yr (+$23K–$54K implementation). SmartSimple $50K–$200K/yr (+$36K–$72K implementation). AA provides a full-lifecycle GMS at a fraction of enterprise incumbents.</div>
+</div>
+</div>
+
+<h3>How AA GMS-only compares to the market</h3>
+<div id="bars1"></div>
+</div>
+
+<!-- SCENARIO 2 -->
+<div class="view" id="v2">
+<div class="note"><b>Scenario 2 — New customer, GMS + AcceleratorApp bundle.</b> They want grant management AND the accelerator platform (community, program management, mentoring, etc.). They buy an AA bundle + the GMS module on top. This is the full-platform customer.</div>
+
+<h3>Step 1: Choose an AA bundle</h3>
+<div class="grid3" style="margin-bottom:28px">
+<div class="card top-gray">
+<div class="tier-label">AA Launch</div>
+<div class="price">€419<span class="price-unit">/mo</span></div>
+<div class="price-sub">2 admins · 3 programs</div>
+<div class="fl">
+<div class="fl-row">Application (Tier 1)</div>
+<div class="fl-row">Community (Tier 1)</div>
+<div class="fl-row">Program (Tier 1)</div>
+<div class="fl-row">Mentoring (Tier 1)</div>
+</div>
+</div>
+<div class="card top-gray">
+<div class="tier-label">AA Essentials</div>
+<div class="price">€549<span class="price-unit">/mo</span></div>
+<div class="price-sub">2 admins · 4 programs</div>
+<div class="fl">
+<div class="fl-row">Application (Tier 2)</div>
+<div class="fl-row">Community (Tier 2)</div>
+<div class="fl-row">Program (Tier 2)</div>
+<div class="fl-row">Mentoring (Tier 2)</div>
+<div class="fl-row">Security (Tier 1)</div>
+</div>
+</div>
+<div class="card top-gray">
+<div class="tier-label">AA Pro</div>
+<div class="price">€749<span class="price-unit">/mo</span></div>
+<div class="price-sub">2 admins · 5 programs</div>
+<div class="fl">
+<div class="fl-row">Application (Tier 3)</div>
+<div class="fl-row">Community (Tier 3)</div>
+<div class="fl-row">Program (Tier 3)</div>
+<div class="fl-row">Mentoring (Tier 3)</div>
+<div class="fl-row">Online Learning (Tier 1)</div>
+<div class="fl-row">Security (Tier 1)</div>
+</div>
+</div>
+</div>
+
+<h3>Step 2: Add GMS module</h3>
+<div class="grid3" style="margin-bottom:28px">
+<div class="card top-purple">
+<div class="tier-label">+ GMS Essentials</div>
+<div class="price">€299<span class="price-unit">/mo</span></div>
+<div class="fl"><div class="fl-row">Basic grant lifecycle (see Scenario 1)</div></div>
+</div>
+<div class="card top-purple">
+<div class="tier-label">+ GMS Professional</div>
+<div class="price">€599<span class="price-unit">/mo</span></div>
+<div class="fl"><div class="fl-row">Advanced grant lifecycle (see Scenario 1)</div></div>
+</div>
+<div class="card top-purple">
+<div class="tier-label">+ GMS Custom</div>
+<div class="price">Custom</div>
+<div class="fl"><div class="fl-row">Enterprise grant lifecycle (see Scenario 1)</div></div>
+</div>
+</div>
+
+<h3>Full cost examples — new customer, full platform</h3>
+<div class="grid3" style="margin-bottom:32px">
+<div class="scenario">
+<div class="scenario-head"><div class="scenario-dot" style="background:var(--t3)"></div><div class="scenario-title">Emerging accelerator + basic GMS</div></div>
+<div class="scenario-desc">Small accelerator adding funding management</div>
+<table class="cost-table">
+<tr><td class="label">AA Launch bundle</td><td class="val">€419/mo</td></tr>
+<tr><td class="label">GMS Essentials module</td><td class="val">€299/mo</td></tr>
+<tr><td class="label">2 admins, 3 programs (included)</td><td class="val">€0</td></tr>
+<tr class="total-row"><td>Total</td><td class="val">€718/mo · €8,616/yr</td></tr>
+</table>
+<div class="meta"><b>What they get:</b> Full accelerator platform (applications, community, program mgmt, mentoring) PLUS grant lifecycle (intake, disbursements, compliance, milestones). No competitor offers this combination. Dealum ($1.4K) has no GMS. Fluxx ($13.5K) has no accelerator features.</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-head"><div class="scenario-dot" style="background:var(--accent)"></div><div class="scenario-title">Growth innovation program</div></div>
+<div class="scenario-desc">Structured program with serious funding operations</div>
+<table class="cost-table">
+<tr><td class="label">AA Essentials bundle</td><td class="val">€549/mo</td></tr>
+<tr><td class="label">GMS Professional module</td><td class="val">€599/mo</td></tr>
+<tr><td class="label">+3 extra admin seats</td><td class="val">€177/mo</td></tr>
+<tr><td class="label">+4 extra programs</td><td class="val">€316/mo</td></tr>
+<tr class="total-row"><td>Total</td><td class="val">€1,641/mo · €19,692/yr</td></tr>
+</table>
+<div class="meta"><b>What they get:</b> Full accelerator + advanced GMS with 5 admins, 8 programs, milestone disbursements, approval workflows, evidence collection, amendment handling. <b>vs. Fluxx $25K/yr</b> (FL Sports contract, GMS-only, no accelerator). AA gives MORE for LESS.</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-head"><div class="scenario-dot" style="background:var(--green)"></div><div class="scenario-title">Scale program + enterprise GMS</div></div>
+<div class="scenario-desc">Large org, multiple cohorts, complex funding</div>
+<table class="cost-table">
+<tr><td class="label">AA Pro bundle</td><td class="val">€749/mo</td></tr>
+<tr><td class="label">GMS Custom module</td><td class="val">~€2,500/mo</td></tr>
+<tr><td class="label">+8 extra admin seats</td><td class="val">€472/mo</td></tr>
+<tr><td class="label">+7 extra programs</td><td class="val">€553/mo</td></tr>
+<tr class="total-row"><td>Total (estimated)</td><td class="val">€4,274/mo · €51,288/yr</td></tr>
+</table>
+<div class="meta"><b>What they get:</b> Full AA Pro (all accelerator modules) + enterprise GMS (SSO, API, integrations, compliance, portfolio reporting) with 10 admins, 12 programs. <b>vs. SmartSimple $50K–$200K/yr</b> (GMS-only, plus $36K–$72K implementation). AA delivers accelerator + GMS at SmartSimple's entry price.</div>
+</div>
+</div>
+
+<h3>How AA full-platform compares to the market</h3>
+<div id="bars2"></div>
+</div>
+
+<!-- SCENARIO 3 -->
+<div class="view" id="v3">
+<div class="note"><b>Scenario 3 — Existing AA customer, GMS add-on.</b> They're already paying for an AA bundle (Launch / Essentials / Pro). They want to add the GMS funding module to their existing subscription. They get a <b>35% loyalty discount</b> on the GMS module price. Their existing seats and program slots are shared — additional seats and programs at standard rates.</div>
+
+<h3>GMS add-on pricing for existing customers</h3>
+<div class="grid3" style="margin-bottom:28px">
+<div class="card top-gray">
+<div class="tier-label">GMS Essentials add-on</div>
+<div style="display:flex;align-items:baseline;gap:8px"><div class="price">€195</div><div class="price-unit">/mo</div></div>
+<div style="margin:4px 0 16px"><span class="price-strike">€299/mo</span><span class="discount">35% off</span></div>
+<div class="price-sub">€2,340/yr · adds to existing bundle</div>
+<div class="fl">
+<div class="fl-row fl-head">Adds to your current bundle:</div>
+<div class="fl-row">Application intake + review</div>
+<div class="fl-row">Funding program setup + rounds</div>
+<div class="fl-row">Recipient tracking + records</div>
+<div class="fl-row">Basic disbursement tracking</div>
+<div class="fl-row">Basic compliance checks</div>
+<div class="fl-row">Basic milestones</div>
+<div class="fl-row">Standard reporting</div>
+</div>
+<div class="meta">Uses your existing admin seats and program slots. Need more? Same rates: €59/seat, €79/program.</div>
+</div>
+
+<div class="card pop">
+<div class="badge">Best value</div>
+<div class="tier-label" style="margin-top:8px">GMS Professional add-on</div>
+<div style="display:flex;align-items:baseline;gap:8px"><div class="price">€389</div><div class="price-unit">/mo</div></div>
+<div style="margin:4px 0 16px"><span class="price-strike">€599/mo</span><span class="discount">35% off</span></div>
+<div class="price-sub">€4,668/yr · adds to existing bundle</div>
+<div class="fl">
+<div class="fl-row fl-head">Everything in Essentials, plus:</div>
+<div class="fl-row">Milestone-linked disbursements</div>
+<div class="fl-row">Multi-step approval workflows</div>
+<div class="fl-row">Evidence collection workflows</div>
+<div class="fl-row">Clarification loops</div>
+<div class="fl-row">Amendment workflows</div>
+<div class="fl-row">Management dashboards</div>
+</div>
+</div>
+
+<div class="card top-green">
+<div class="tier-label">GMS Custom add-on</div>
+<div class="price">Custom</div>
+<div class="price-sub">From €1,625/mo (35% off standard)</div>
+<div class="fl">
+<div class="fl-row fl-head">Everything in Professional, plus:</div>
+<div class="fl-row">Advanced compliance + enforcement</div>
+<div class="fl-row">Portfolio-level reporting</div>
+<div class="fl-row">SSO / SAML</div>
+<div class="fl-row">API access</div>
+<div class="fl-row">Custom integrations</div>
+<div class="fl-row">Data residency + advanced security</div>
+</div>
+</div>
+</div>
+
+<h3>Full cost examples — existing AA customers adding GMS</h3>
+<div class="grid3" style="margin-bottom:32px">
+<div class="scenario">
+<div class="scenario-head"><div class="scenario-dot" style="background:var(--t3)"></div><div class="scenario-title">Launch customer + GMS Essentials</div></div>
+<div class="scenario-desc">Existing Launch user adding basic funding</div>
+<table class="cost-table">
+<tr><td class="label">Current AA Launch</td><td class="val">€419/mo</td></tr>
+<tr><td class="label">GMS Essentials (35% off)</td><td class="val">€195/mo</td></tr>
+<tr><td class="label">Existing 2 admins, 3 programs</td><td class="val">€0</td></tr>
+<tr class="total-row"><td>New total</td><td class="val">€614/mo · €7,368/yr</td></tr>
+</table>
+<div class="meta"><b>Revenue uplift:</b> €195/mo (+46% on current €419/mo). <b>vs. market:</b> Gets full accelerator + grant lifecycle for less than Submittable charges for GMS alone ($10K).</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-head"><div class="scenario-dot" style="background:var(--accent)"></div><div class="scenario-title">Essentials customer + GMS Pro</div></div>
+<div class="scenario-desc">Growing org adding advanced funding</div>
+<table class="cost-table">
+<tr><td class="label">Current AA Essentials</td><td class="val">€549/mo</td></tr>
+<tr><td class="label">GMS Professional (35% off)</td><td class="val">€389/mo</td></tr>
+<tr><td class="label">+3 extra admin seats</td><td class="val">€177/mo</td></tr>
+<tr><td class="label">+2 extra programs</td><td class="val">€158/mo</td></tr>
+<tr class="total-row"><td>New total</td><td class="val">€1,273/mo · €15,276/yr</td></tr>
+</table>
+<div class="meta"><b>Revenue uplift:</b> €724/mo (+132% on current €549/mo). <b>vs. market:</b> Full platform with advanced GMS at half the cost of a Fluxx entry deal ($13.5K for GMS-only).</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-head"><div class="scenario-dot" style="background:var(--green)"></div><div class="scenario-title">Pro customer + GMS Pro</div></div>
+<div class="scenario-desc">Mature org adding full funding capabilities</div>
+<table class="cost-table">
+<tr><td class="label">Current AA Pro</td><td class="val">€749/mo</td></tr>
+<tr><td class="label">GMS Professional (35% off)</td><td class="val">€389/mo</td></tr>
+<tr><td class="label">+5 extra admin seats</td><td class="val">€295/mo</td></tr>
+<tr><td class="label">+5 extra programs</td><td class="val">€395/mo</td></tr>
+<tr class="total-row"><td>New total</td><td class="val">€1,828/mo · €21,936/yr</td></tr>
+</table>
+<div class="meta"><b>Revenue uplift:</b> €1,079/mo (+144% on current €749/mo). <b>vs. market:</b> Fluxx FL Sports Foundation contract was $25K/yr for GMS alone. AA Pro + GMS Pro with 7 admins and 10 programs is €21.9K total — platform + GMS combined.</div>
+</div>
+</div>
+
+<h3>Revenue impact — existing customer base</h3>
+<div class="grid3" style="margin-bottom:32px">
+<div style="background:var(--surface);border-radius:var(--r);padding:16px 18px;text-align:center">
+<div style="font-size:11px;color:var(--t3);margin-bottom:4px">Min GMS uplift per customer</div>
+<div style="font-size:22px;font-weight:500">€195/mo</div>
+<div style="font-size:11px;color:var(--t3)">+46% on Launch</div>
+</div>
+<div style="background:var(--surface);border-radius:var(--r);padding:16px 18px;text-align:center">
+<div style="font-size:11px;color:var(--t3);margin-bottom:4px">Avg GMS uplift per customer</div>
+<div style="font-size:22px;font-weight:500">€389/mo</div>
+<div style="font-size:11px;color:var(--t3)">+71% on Essentials</div>
+</div>
+<div style="background:var(--surface);border-radius:var(--r);padding:16px 18px;text-align:center">
+<div style="font-size:11px;color:var(--t3);margin-bottom:4px">Max GMS uplift per customer</div>
+<div style="font-size:22px;font-weight:500">€1,079+/mo</div>
+<div style="font-size:11px;color:var(--t3)">+144% on Pro (w/ seats + programs)</div>
+</div>
+</div>
+</div>
+
+<!-- FEATURE COMPARISON -->
+<div class="view" id="v4">
+<div class="note"><b>Complete feature matrix.</b> Every feature across GMS tiers, AA bundles, and how they compare to competitors. Use this as the single source of truth for what's included where.</div>
+
+<div style="overflow-x:auto;margin-bottom:32px;border:.5px solid var(--brd);border-radius:var(--rl)">
+<table class="feat-table" style="min-width:760px">
+<thead>
+<tr>
+<th style="width:30%">Feature</th>
+<th style="width:14%">GMS<br>Essentials</th>
+<th style="width:14%">GMS<br>Professional</th>
+<th style="width:14%">GMS<br>Custom</th>
+<th style="width:14%">AA Bundles<br>(no GMS)</th>
+<th style="width:14%">Competitors<br>who have it</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="cat" colspan="6">Grant lifecycle — core</td></tr>
+<tr><td>Application intake + review</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">All GMS vendors</td></tr>
+<tr><td>Funding program setup + rounds</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx, SmartSimple, Foundant</td></tr>
+<tr><td>Recipient tracking + records</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx, SmartSimple, Bonterra</td></tr>
+<tr><td>Basic disbursement tracking</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx, SmartSimple, Bonterra</td></tr>
+<tr><td>Basic compliance checks</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx, SmartSimple</td></tr>
+<tr><td>Basic milestone tracking</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx only</td></tr>
+<tr><td>Standard reporting dashboards</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">All GMS vendors</td></tr>
+
+<tr><td class="cat" colspan="6">Grant lifecycle — advanced (Professional+)</td></tr>
+<tr><td>Milestone-linked disbursements</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx, SmartSimple enterprise</td></tr>
+<tr><td>Multi-step approval workflows</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx, SmartSimple</td></tr>
+<tr><td>Evidence collection workflows</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx enterprise</td></tr>
+<tr><td>Clarification loops</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx, SmartSimple</td></tr>
+<tr><td>Amendment workflows</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx enterprise only</td></tr>
+<tr><td>Management dashboards</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx, SmartSimple, Bonterra</td></tr>
+
+<tr><td class="cat" colspan="6">Grant lifecycle — enterprise (Custom only)</td></tr>
+<tr><td>Advanced compliance + enforcement</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx, SmartSimple enterprise</td></tr>
+<tr><td>Portfolio-level reporting</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx, SmartSimple</td></tr>
+<tr><td>SSO / SAML</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">All enterprise tiers</td></tr>
+<tr><td>API access</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Enterprise at 7 of 11 competitors</td></tr>
+<tr><td>Custom integrations</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">Fluxx, SmartSimple, Bonterra</td></tr>
+<tr><td>Data residency options</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">SmartSimple, Bonterra</td></tr>
+
+<tr><td class="cat" colspan="6">AA platform modules (not GMS)</td></tr>
+<tr><td>Application call module</td><td class="xx">—</td><td><span class="pill pill-p">Add-on</span></td><td><span class="pill pill-p">Add-on</span></td><td class="ck">&#10003;</td><td style="font-size:11px;color:var(--t2)">Submittable, Good Grants</td></tr>
+<tr><td>Community module</td><td class="xx">—</td><td><span class="pill pill-p">Add-on</span></td><td><span class="pill pill-p">Add-on</span></td><td class="ck">&#10003;</td><td style="font-size:11px;color:var(--t2)">No GMS competitor has this</td></tr>
+<tr><td>Program management module</td><td class="xx">—</td><td><span class="pill pill-p">Add-on</span></td><td><span class="pill pill-p">Add-on</span></td><td class="ck">&#10003;</td><td style="font-size:11px;color:var(--t2)">Dealum (basic)</td></tr>
+<tr><td>Mentoring module</td><td class="xx">—</td><td><span class="pill pill-p">Add-on</span></td><td><span class="pill pill-p">Add-on</span></td><td class="ck">&#10003;</td><td style="font-size:11px;color:var(--t2)">No GMS competitor has this</td></tr>
+<tr><td>Online Learner (LMS)</td><td class="xx">—</td><td><span class="pill pill-p">Add-on</span></td><td><span class="pill pill-p">Add-on</span></td><td>Pro only</td><td style="font-size:11px;color:var(--t2)">No GMS competitor has this</td></tr>
+<tr><td>Security module</td><td class="xx">—</td><td><span class="pill pill-p">Add-on</span></td><td><span class="pill pill-p">Add-on</span></td><td>Ess+ only</td><td style="font-size:11px;color:var(--t2)">SSO only at enterprise tiers</td></tr>
+<tr><td>White Label</td><td class="xx">—</td><td><span class="pill pill-p">Add-on</span></td><td><span class="pill pill-p">Add-on</span></td><td>Separate</td><td style="font-size:11px;color:var(--t2)">SmartSimple, Submittable enterprise</td></tr>
+
+<tr><td class="cat" colspan="6">Pricing mechanics</td></tr>
+<tr><td>Admin seats included</td><td>2</td><td>5</td><td>Negotiated</td><td>2</td><td style="font-size:11px;color:var(--t2)">Varies: 0 to unlimited</td></tr>
+<tr><td>Programs included</td><td>3</td><td>6</td><td>Negotiated</td><td>3–5</td><td style="font-size:11px;color:var(--t2)">Varies: 1 to unlimited</td></tr>
+<tr><td>Extra seat cost</td><td>€59/mo</td><td>€59/mo</td><td>Negotiated</td><td>€59/mo</td><td style="font-size:11px;color:var(--t2)">$50–$225/seat/mo</td></tr>
+<tr><td>Extra program cost</td><td>€79/mo</td><td>€79/mo</td><td>Negotiated</td><td>€79/mo</td><td style="font-size:11px;color:var(--t2)">$0 to hard caps</td></tr>
+<tr><td>Existing customer discount</td><td>35%</td><td>35%</td><td>35%</td><td>—</td><td style="font-size:11px;color:var(--t2)">No competitor offers this</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Price comparison summary (annual)</h3>
+<div style="overflow-x:auto;border:.5px solid var(--brd);border-radius:var(--rl);margin-bottom:28px">
+<table class="feat-table" style="min-width:700px">
+<thead><tr>
+<th style="width:22%">Scenario</th>
+<th style="width:18%">AA price/yr</th>
+<th style="width:20%">Closest competitor</th>
+<th style="width:18%">Competitor price</th>
+<th style="width:22%">AA advantage</th>
+</tr></thead>
+<tbody>
+<tr><td>S1: GMS Essentials only</td><td style="font-weight:500">€3,588</td><td>Good Grants Intro</td><td>€3,475</td><td style="font-size:11px;color:var(--t2)">AA has disbursements, compliance, milestones</td></tr>
+<tr><td>S1: GMS Professional only</td><td style="font-weight:500">€7,188</td><td>Submittable starter</td><td>~€9,250</td><td style="font-size:11px;color:var(--t2)">AA 22% cheaper with full lifecycle</td></tr>
+<tr><td>S2: AA Launch + GMS Ess</td><td style="font-weight:500">€8,616</td><td>Dealum Pro + separate GMS</td><td>€4,608 + ?</td><td style="font-size:11px;color:var(--t2)">No combined product exists elsewhere</td></tr>
+<tr><td>S2: AA Ess + GMS Pro (7 admin, 8 prog)</td><td style="font-weight:500">€19,692</td><td>Fluxx (FL contract)</td><td>~€23,125</td><td style="font-size:11px;color:var(--t2)">AA 15% cheaper WITH accelerator platform</td></tr>
+<tr><td>S3: Launch + GMS Ess (35% off)</td><td style="font-weight:500">€7,368</td><td>Submittable starter</td><td>~€9,250</td><td style="font-size:11px;color:var(--t2)">20% cheaper, full lifecycle, loyalty rewarded</td></tr>
+<tr><td>S3: Ess + GMS Pro (35% off, 5 admin, 6 prog)</td><td style="font-weight:500">€15,276</td><td>Fluxx small-foundation</td><td>€12,488–€32,838</td><td style="font-size:11px;color:var(--t2)">AA includes accelerator platform</td></tr>
+<tr><td>S3: Pro + GMS Pro (35% off, 7 admin, 10 prog)</td><td style="font-weight:500">€21,936</td><td>Fluxx (FL contract)</td><td>€23,125</td><td style="font-size:11px;color:var(--t2)">AA full platform < Fluxx GMS-only</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<script>
+const isDk=matchMedia('(prefers-color-scheme:dark)').matches;
+const tabs=[
+{id:'v1',label:'Scenario 1: New — GMS only'},
+{id:'v2',label:'Scenario 2: New — GMS + AA'},
+{id:'v3',label:'Scenario 3: Existing — add GMS'},
+{id:'v4',label:'Full feature + price comparison'}
+];
+let cur='v1';
+
+function renderTabs(){
+const el=document.getElementById('tabs');
+el.innerHTML='';
+tabs.forEach(t=>{
+const b=document.createElement('button');
+b.textContent=t.label;
+b.className='tab'+(t.id===cur?' on':'');
+b.onclick=()=>{cur=t.id;renderTabs();document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id===cur))};
+el.appendChild(b);
+});
+}
+
+function bar(container,items,maxVal){
+const el=document.getElementById(container);
+if(!el)return;
+el.innerHTML='';
+items.forEach(it=>{
+const pct=Math.min((it.max/maxVal)*100,100);
+const pctMin=(it.min/maxVal)*100;
+const isAA=it.label.startsWith('AA');
+const c=isAA?(isDk?'#6B9AFF':'#1D4ED8'):(isDk?'#4A4A45':'#D3D1C7');
+const mc=isAA?(isDk?'#6B9AFF':'#1D4ED8'):'transparent';
+el.innerHTML+=`<div class="comp-bar">
+<div class="comp-bar-label"><span>${it.label}</span><span style="font-variant-numeric:tabular-nums">${it.min===it.max?'€'+it.min.toLocaleString()+'K':'€'+it.min.toLocaleString()+'K – €'+it.max.toLocaleString()+'K'}/yr</span></div>
+<div class="comp-bar-track">
+<div class="comp-bar-fill" style="left:${pctMin}%;width:${pct-pctMin}%;background:${c};min-width:4px"></div>
+${isAA?`<div class="comp-bar-marker" style="left:${pctMin}%;background:${mc}"></div>`:''}
+</div></div>`;
+});
+}
+
+renderTabs();
+
+bar('bars1',[
+{label:'Dealum (accelerator)',min:1.4,max:8.6},
+{label:'Good Grants',min:3.5,max:6.9},
+{label:'AA GMS Essentials',min:3.6,max:3.6},
+{label:'WizeHive (Zengine)',min:1.3,max:9.8},
+{label:'Foundant GLM',min:3.9,max:8.8},
+{label:'AA GMS Professional',min:7.2,max:7.2},
+{label:'SM Apply',min:6.5,max:16.6},
+{label:'Submittable',min:4.4,max:16.6},
+{label:'AA GMS Pro (7 admin, 8 prog)',min:10.5,max:10.5},
+{label:'Fluxx (small foundation)',min:12.5,max:32.8},
+{label:'AA GMS Custom',min:30,max:42},
+{label:'SmartSimple',min:46.2,max:185},
+{label:'Fluxx (mid-size)',min:33.7,max:247},
+],260);
+
+bar('bars2',[
+{label:'Dealum Pro (no GMS)',min:4.3,max:8},
+{label:'AA Launch + GMS Essentials',min:8.6,max:8.6},
+{label:'Submittable (GMS-only)',min:4.4,max:16.6},
+{label:'AA Essentials + GMS Pro (5 admin, 8 prog)',min:19.7,max:19.7},
+{label:'Fluxx (FL Sports contract)',min:23.1,max:23.1},
+{label:'AA Pro + GMS Custom (10 admin, 12 prog)',min:51.3,max:51.3},
+{label:'SmartSimple (GMS-only)',min:46.2,max:185},
+{label:'Fluxx mid-size (GMS-only)',min:33.7,max:247},
+],260);
+</script>
+</body>
+</html>
