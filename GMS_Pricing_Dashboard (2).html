@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcceleratorApp GMS — Competitive Pricing Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF8;
+  --bg-card: #FFFFFF;
+  --bg-surface: #F3F2EE;
+  --text-primary: #1A1A18;
+  --text-secondary: #6B6B65;
+  --text-tertiary: #9C9C95;
+  --border: rgba(0,0,0,0.08);
+  --border-hover: rgba(0,0,0,0.15);
+  --accent: #1D4ED8;
+  --accent-soft: #EFF4FF;
+  --green: #0F766E;
+  --green-bg: #ECFDF5;
+  --purple: #6D28D9;
+  --purple-bg: #F5F3FF;
+  --coral: #C2410C;
+  --coral-bg: #FFF7ED;
+  --red: #B91C1C;
+  --red-bg: #FEF2F2;
+  --amber: #92400E;
+  --amber-bg: #FFFBEB;
+  --blue: #1E40AF;
+  --blue-bg: #EFF6FF;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121210;
+    --bg-card: #1C1C19;
+    --bg-surface: #242420;
+    --text-primary: #EDEDE8;
+    --text-secondary: #9C9C95;
+    --text-tertiary: #6B6B65;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.15);
+    --accent: #6B9AFF;
+    --accent-soft: rgba(107,154,255,0.1);
+    --green-bg: rgba(15,118,110,0.1);
+    --green: #5EEAD4;
+    --purple-bg: rgba(109,40,217,0.1);
+    --purple: #C4B5FD;
+    --coral-bg: rgba(194,65,12,0.1);
+    --coral: #FDBA74;
+    --red-bg: rgba(185,28,28,0.1);
+    --red: #FCA5A5;
+    --amber-bg: rgba(146,64,14,0.1);
+    --amber: #FCD34D;
+    --blue-bg: rgba(30,64,175,0.1);
+    --blue: #93C5FD;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.3);
+  }
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+header {
+  margin-bottom: 48px;
+}
+
+header h1 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-surface);
+  padding: 4px;
+  border-radius: var(--radius);
+  margin-bottom: 32px;
+  width: fit-content;
+}
+
+.nav button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 7px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.nav button:hover { color: var(--text-primary); }
+
+.nav button.active {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+}
+
+.view { display: none; }
+.view.active { display: block; }
+
+.comp-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.comp-pills button {
+  padding: 6px 14px;
+  border: 0.5px solid var(--border);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--text-tertiary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.comp-pills button:hover {
+  border-color: var(--border-hover);
+  color: var(--text-secondary);
+}
+
+.comp-pills button.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: transparent;
+  font-weight: 500;
+}
+
+.comp-card {
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.comp-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.comp-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.comp-seg {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.comp-price-block { text-align: right; }
+
+.comp-price-main {
+  font-size: 16px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.comp-price-sub {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.quad-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.quad-tab {
+  padding: 10px 0;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.quad-tab:hover { border-color: var(--border-hover); }
+
+.quad-tab.active-s { background: var(--green-bg); color: var(--green); border-color: transparent; font-weight: 500; }
+.quad-tab.active-w { background: var(--red-bg); color: var(--red); border-color: transparent; font-weight: 500; }
+.quad-tab.active-o { background: var(--blue-bg); color: var(--blue); border-color: transparent; font-weight: 500; }
+.quad-tab.active-t { background: var(--amber-bg); color: var(--amber); border-color: transparent; font-weight: 500; }
+
+.quad-content {
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+}
+
+.quad-content.q-s { background: var(--green-bg); border-left: 3px solid var(--green); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+.quad-content.q-w { background: var(--red-bg); border-left: 3px solid var(--red); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+.quad-content.q-o { background: var(--blue-bg); border-left: 3px solid var(--blue); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+.quad-content.q-t { background: var(--amber-bg); border-left: 3px solid var(--amber); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+
+.quad-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 11px 0;
+}
+
+.quad-item + .quad-item { border-top: 0.5px solid var(--border); }
+
+.quad-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+.q-s .quad-dot { background: var(--green); }
+.q-w .quad-dot { background: var(--red); }
+.q-o .quad-dot { background: var(--blue); }
+.q-t .quad-dot { background: var(--amber); }
+
+.quad-item span { font-size: 14px; line-height: 1.6; }
+.quad-item em { font-size: 12px; color: var(--text-tertiary); font-style: normal; display: block; margin-top: 3px; }
+
+.opp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.opp-card {
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease;
+}
+
+.opp-card:hover { box-shadow: var(--shadow-md); }
+
+.opp-card.high { border-top: 3px solid var(--accent); border-top-left-radius: 0; border-top-right-radius: 0; }
+.opp-card.med { border-top: 3px solid var(--amber); border-top-left-radius: 0; border-top-right-radius: 0; }
+
+.opp-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.opp-tag.high { background: var(--blue-bg); color: var(--blue); }
+.opp-tag.med { background: var(--amber-bg); color: var(--amber); }
+
+.opp-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+.opp-desc { font-size: 13px; line-height: 1.65; color: var(--text-secondary); }
+
+.feat-section { margin-bottom: 32px; }
+
+.feat-section-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.feat-item {
+  padding: 14px 16px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.feat-item.base { background: var(--green-bg); border-left: 3px solid var(--green); }
+.feat-item.variable { background: var(--purple-bg); border-left: 3px solid var(--purple); }
+.feat-item.fixed { background: var(--coral-bg); border-left: 3px solid var(--coral); }
+
+.feat-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+.feat-note { font-size: 12px; color: var(--text-secondary); }
+
+.feat-tier {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-top: 4px;
+  background: var(--coral-bg);
+  color: var(--coral);
+}
+
+.legend {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 28px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in { animation: fadeUp 0.3s ease forwards; }
+
+@media (max-width: 680px) {
+  .opp-grid { grid-template-columns: 1fr; }
+  .feat-grid { grid-template-columns: 1fr 1fr; }
+  .quad-tabs { grid-template-columns: repeat(2, 1fr); }
+  .comp-card-top { flex-direction: column; gap: 12px; }
+  .comp-price-block { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Competitive pricing intelligence</h1>
+    <p>AcceleratorApp GMS &mdash; 11 competitors benchmarked &mdash; April 2026</p>
+  </header>
+
+  <div class="nav" id="nav"></div>
+
+  <div class="view active" id="view-swot">
+    <div class="comp-pills" id="compPills"></div>
+    <div id="compCard"></div>
+    <div class="quad-tabs" id="quadTabs"></div>
+    <div id="quadContent"></div>
+  </div>
+
+  <div class="view" id="view-opps">
+    <div class="opp-grid" id="oppGrid"></div>
+  </div>
+
+  <div class="view" id="view-feats">
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Base &mdash; all tiers</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--purple)"></span>Variable &mdash; scales with usage</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--coral)"></span>Fixed premium &mdash; tier-gated</span>
+    </div>
+    <div id="featContent"></div>
+  </div>
+</div>
+
+<script>
+const C=[
+{n:"Submittable",seg:"Mid-market",pr:"$4.8K–$18K/yr",v:"$10K verified starter",
+s:["No per-program limits — unlike SM Apply and Good Grants, Submittable charges by submission volume, not program count. Buyers can run 20+ programs without a tier jump. <em>(Source: submittable.com, SmarterSelect)</em>","Strong brand in nonprofit/arts — rated 4.5/5 on Capterra with 400+ reviews. Dominant in scholarship and CSR submission management where name recognition drives inbound leads. <em>(Source: Capterra)</em>","Three published tiers at $399/$799/$1,499 per month ($4.8K\u2013$18K/yr), making them one of the few mid-market GMS vendors with visible pricing. <em>(Source: submittable.com)</em>"],
+w:["Per-seat for admins AND reviewers \u2014 a Capterra reviewer complained about paying full-year licenses for reviewers needed only during 2-month evaluation windows. A 10-person review panel adds $5K\u2013$10K/yr. <em>(Source: Capterra reviews)</em>","Surprise add-on fees: BILL.com payment integration, custom branding, and SSO are all charged separately on top of the published tier price. Multiple reviewers flagged unexpected costs post-signing. <em>(Source: Capterra, SmarterSelect)</em>","One reviewer reported a 40% price increase at renewal with no new features added. Others say they only stayed because of grandfathered rates. <em>(Source: Capterra, G2)</em>"],
+o:["Their reviewer-seat model is the clearest attack vector. If AA bundles unlimited reviewers, every accelerator with a mentor pool (typically 15\u201330 people) saves $8K\u2013$15K/yr vs. Submittable. <em>(Impact: direct competitive win)</em>","Submittable\u2019s $10K verified starter floor is 4x AA\u2019s proposed emerging tier at ~$2.4K/yr. Budget-conscious accelerators have a clear cost reason to pick AA. <em>(Impact: price positioning)</em>","Zero post-award features \u2014 no disbursement tracking, no milestone management, no compliance. Buyers needing the full grant lifecycle need a second tool or switch to AA\u2019s integrated suite. <em>(Impact: functional gap)</em>"],
+t:["Submittable claims 4,000+ customers with deep penetration in US nonprofits \u2014 displacing them in existing accounts requires a compelling migration story, not just price. <em>(Risk: switching costs)</em>","They\u2019re adding enterprise features (SSO, API, advanced permissions) to move upmarket into the $20K\u2013$50K segment, which overlaps with AA\u2019s mid-market corridor. <em>(Risk: segment overlap)</em>","Large Capterra/G2 review volume (400+) creates social proof that\u2019s hard to match with a smaller review base. <em>(Risk: perception gap)</em>"]},
+{n:"Good Grants",seg:"SMB, transparent",pr:"$3.75K–$7.5K/yr",v:"Published pricing, free trial",
+s:["One of only 4 vendors (of 11 researched) with fully published pricing: Intro $3,750/yr, Growth $5,000/yr, Premium $7,500/yr. Buyers self-qualify without a sales call. <em>(Source: goodgrants.com/pricing)</em>","Unlimited users at every tier including Intro \u2014 reviewers, admins, and PMs all included. Same moat Fluxx uses at 5\u201340x the price. <em>(Source: goodgrants.com)</em>","Only GMS vendor with a self-serve 14-day free trial. Every other vendor (Fluxx, SmartSimple, Submittable, Bonterra) requires a sales demo just to see the product. <em>(Source: goodgrants.com)</em>"],
+w:["Hard program gating: Intro allows only 1 active form, Growth allows 10, Premium allows unlimited. A mid-size accelerator running 5 programs must buy Growth at $5K. <em>(Source: goodgrants.com/pricing)</em>","Pre-award only \u2014 no funding module, no disbursement tracking, no milestone management, no compliance. Buyers needing post-award lifecycle must add a second tool. <em>(Source: product pages)</em>","SSO/SAML is Premium-only ($7,500/yr). University and government buyers where SSO is a procurement requirement are forced to the highest tier even for basic needs. <em>(Source: goodgrants.com/pricing)</em>"],
+o:["AA can counter their program gating: a buyer comparing $5K Good Grants (10 programs) vs. ~$2.4K AA (unlimited) has a clear decision. <em>(Impact: direct positioning)</em>","No enterprise sales team or implementation services. Any buyer outgrowing them (50+ programs, compliance needs, disbursements) has nowhere to go \u2014 AA is the upgrade path. <em>(Impact: upsell capture)</em>","NZ-based with primarily ANZ/UK customers. North American presence is limited, giving AA a geographic advantage in US/Canada/EU. <em>(Impact: geographic gap)</em>"],
+t:["Transparent pricing forces honest comparison \u2014 buyers will put AA and Good Grants side-by-side. AA\u2019s value story must clearly justify any premium over Good Grants\u2019 $3.75K entry. <em>(Risk: price anchoring)</em>","Growing quickly among small foundations. Capterra and Software Advice reviews are increasingly positive. <em>(Risk: segment momentum)</em>","Reviewers consistently praise their clean, simple UX. If AA feels more complex, the perceived value gap may not justify a higher price for simpler use cases. <em>(Risk: UX perception)</em>"]},
+{n:"Fluxx",seg:"Enterprise",pr:"$13.5K–$300K+/yr",v:"$25K verified FL contract",
+s:["Unlimited staff accounts is their #1 competitive weapon. A Capterra reviewer (Director of Grants, Hawaii foundation) stated they chose Fluxx over SmartSimple specifically because of unlimited users. <em>(Source: Capterra review)</em>","Full grant lifecycle: intake, review, award, disbursement, milestone, compliance, and audit \u2014 all in one platform. This is the benchmark AA\u2019s GMS module competes against. <em>(Source: Tech Impact Consumer Guide)</em>","$22.5M revenue in 2025 across 300+ customers = ~$70K average ACV. PE-backed by ABS Capital Partners since 2022, giving them capital for growth. <em>(Source: RocketReach revenue, ABS Capital press release)</em>"],
+w:["FL Sports Foundation signed a public contract: $25,000/yr on a 3-year term ($75K total) PLUS $23,069 one-time onboarding \u2014 implementation was 92% of the first year\u2019s license. <em>(Source: playinflorida.com public PDF, July 2023)</em>","Tech Impact vendor-confirmed range: small foundations $13.5K\u2013$35.5K/yr, mid-size $36.5K\u2013$267K/yr, large $300K+/yr. Even the entry tier is 5\u201310x what most accelerators budget. <em>(Source: guides.techimpact.org)</em>","$250/hr change order rate post-implementation \u2014 any workflow adjustment or new report after go-live costs $2K\u2013$5K per request. Multiple Capterra reviewers cite this as painful. <em>(Source: FL Sports Foundation contract, Capterra)</em>"],
+o:["The gap between AA\u2019s ~$2.4K emerging tier and Fluxx\u2019s $13.5K floor is $11,100/yr \u2014 that\u2019s the addressable market of orgs who need grant tools but can\u2019t justify Fluxx pricing. <em>(Impact: primary market gap)</em>","Fluxx has zero accelerator features (cohort management, mentor matching, demo days). They serve foundations giving grants, not accelerators running programs. AA owns this niche. <em>(Impact: product differentiation)</em>","No published pricing anywhere \u2014 every buyer must do demo-to-quote. AA publishing transparent pricing at 1/5th Fluxx\u2019s floor creates an instant credibility signal. <em>(Impact: sales velocity)</em>"],
+t:["ABS Capital\u2019s PE investment means Fluxx can build a downmarket tier or acquire a competitor. A $5K/yr Fluxx starter would pressure AA\u2019s mid-market corridor directly. <em>(Risk: downmarket expansion)</em>","300+ customers with multi-year contracts and deep integrations (NetSuite, Salesforce). Winning a Fluxx migration requires matching their compliance and audit depth. <em>(Risk: migration complexity)</em>","Government procurement track record (FL Sports Foundation + likely others via state portals) gives Fluxx RFP credibility AA hasn\u2019t yet established. <em>(Risk: procurement gap)</em>"]},
+{n:"SmartSimple",seg:"Enterprise",pr:"$6K–$200K+/yr",v:"£950/day implementation",
+s:["Most configurable GMS platform \u2014 customers build custom workflows, forms, portals, and dashboards without code. This flexibility is why government agencies choose them despite the cost. <em>(Source: Tech Impact, SmartSimple case studies)</em>","Strong in government: UK G-Cloud 14 listed, used by Canadian and US government grant agencies, and referenced in multiple public-sector RFPs. <em>(Source: UK Digital Marketplace listing)</em>","Usage model can start low \u2014 a small team using the system lightly might pay $6K\u2013$15K/yr. But costs scale steeply and unpredictably. <em>(Source: Tech Impact vendor-confirmed ranges)</em>"],
+w:["Usage metering formula: internal users \u00d7 monthly hours-in-system \u00d7 external portal users \u00d7 hosting tier \u00d7 module count. Buyers literally cannot predict their bill. <em>(Source: SmartSimple pricing docs, Tech Impact)</em>","Bader Philanthropies case study (on SmartSimple\u2019s own website): 17 staff needed access but could only afford 7 user licenses, forcing shared logins. <em>(Source: smartsimple.com/client-story/bader-philanthropies)</em>","UK G-Cloud 14 lists implementation at \u00a3950/day (~$1,200/day). A 30\u201360 day project = $36K\u2013$72K in services BEFORE the subscription starts. <em>(Source: UK Digital Marketplace)</em>"],
+o:["Cost unpredictability is documented in reviews and case studies. AA offering fixed annual pricing is a direct counter: \u2018predictable pricing, no surprises.\u2019 <em>(Impact: messaging opportunity)</em>","Government procurement is shifting toward cost certainty. UK G-Cloud and US state portals increasingly require fixed-price proposals \u2014 SmartSimple\u2019s metered model makes this harder. <em>(Impact: procurement advantage)</em>","Implementations take 3\u20136 months with consultants. Any customer frustrated with timeline or change-order costs is a warm migration lead for faster-deploying AA. <em>(Impact: migration pipeline)</em>"],
+t:["Deep multi-year government relationships across Canada, UK, US. Unseating them requires matching their compliance/audit depth. <em>(Risk: government incumbency)</em>","Platform flexibility genuinely serves complex orgs \u2014 a 50-program government portfolio with custom approval chains needs that configurability. AA must prove comparable depth. <em>(Risk: feature gap for complex cases)</em>","G-Cloud 14 listing gives procurement portal standing AA doesn\u2019t have. Getting listed on G-Cloud, BidNet, or state frameworks takes 3\u201312 months. <em>(Risk: procurement access gap)</em>"]},
+{n:"Bonterra",seg:"Enterprise CSR",pr:"~$50/user/mo",v:"2.9% transaction fee",
+s:["Result of merging CyberGrants + EveryAction + Social Solutions + Network for Good \u2014 broadest product suite in CSR/grants covering corporate giving, employee volunteering, matching gifts, and grants. <em>(Source: NonProfit PRO)</em>","Dominant in Fortune 100 CSR: CyberGrants (now Bonterra Grants Management) is the default for large corporate grant programs with 10,000+ employees. <em>(Source: TrustRadius, ITQlick)</em>","ITQlick estimates ~$50/user/month base. For a 20-person team = ~$12K/yr, competitive at entry. But the 2.9% transaction fee on disbursements is what inflates real costs. <em>(Source: ITQlick)</em>"],
+w:["2.9% fee on every disbursement: on $1M in annual grants, that\u2019s $29,000 in fees ON TOP of the subscription. Groundswell explicitly markets against this. <em>(Source: Groundswell comparison, ITQlick)</em>","Ad hoc charges for off-cycle donations, volunteer events, and custom reports. TrustRadius reviewers cite \u2018no cost certainty\u2019 as a primary frustration. <em>(Source: TrustRadius, Groundswell)</em>","20+ week implementation timeline documented by Groundswell. For comparison: Fluxx Quick Start is 4\u20136 weeks, Good Grants requires zero implementation. <em>(Source: Groundswell vs CyberGrants)</em>"],
+o:["The 2.9% fee is AA\u2019s strongest weapon against Bonterra. Any grantmaker disbursing $500K+/yr pays $14,500+ in fees alone \u2014 AA\u2019s flat pricing eliminates this entirely. <em>(Impact: direct savings narrative)</em>","Bonterra\u2019s ICP is corporate CSR departments, not accelerators. Built around employee giving and matching gifts, not cohort management or startup funding. Different segment. <em>(Impact: no head-to-head competition)</em>","TrustRadius/G2 sentiment is worst in category \u2014 complaints about hidden costs, slow support, post-merger integration issues. Disaffected customers are looking for alternatives. <em>(Impact: warm migration leads)</em>"],
+t:["Once deployed across CSR + volunteering + giving, ecosystem lock-in is extremely strong. Migration requires moving multiple departments simultaneously. <em>(Risk: enterprise lock-in)</em>","Merged entity has deep financial resources \u2014 can afford price cuts or free migration incentives if they compete in AA\u2019s segment. <em>(Risk: competitive response)</em>","Corporate buyers mandate single CSR platform for compliance consistency. If Bonterra is already the giving platform, adding their grants module is frictionless. <em>(Risk: bundling advantage)</em>"]},
+{n:"Foundant",seg:"SMB–Mid",pr:"$4.25K–$9.5K/yr",v:"Unlimited users, 2yr terms",
+s:["Unlimited users at $4.25K\u2013$9.5K/yr \u2014 the affordable alternative to Fluxx. Same moat (no seat limits) at 1/3 to 1/10 the price. <em>(Source: Tech Impact Consumer Guide, vendor-confirmed)</em>","Focused product line: GLM (Grant Lifecycle Manager), SLM (Scholarship Lifecycle Manager), CommunitySuite. Each purpose-built for its segment. <em>(Source: foundant.com)</em>","Tech Impact lists them as one of the most popular GMS choices among foundations with $5M\u2013$50M in annual giving. <em>(Source: guides.techimpact.org)</em>"],
+w:["2-year contract requirement is their biggest weakness. Buyers commit 24 months upfront, deterring first-time GMS buyers or orgs with uncertain funding. <em>(Source: Tech Impact, vendor docs)</em>","Foundation-only: zero features for accelerators, angel networks, or innovation programs. No cohort management, startup tracking, or deal flow. <em>(Source: foundant.com)</em>","Platform design shows its age. Multiple reviewers mention dated UI, though functionality is solid. <em>(Source: Capterra reviews)</em>"],
+o:["AA offering monthly or annual contracts (no lock-in) directly counters Foundant\u2019s 2-year terms. First-time GMS buyer: $200/mo with AA vs. $9K 2-year commitment with Foundant. <em>(Impact: lower barrier to entry)</em>","Foundant serves zero accelerators \u2014 their product is for traditional foundations only. Accelerator segment is completely unaddressed. <em>(Impact: no competitive overlap)</em>","$4.25K floor is above AA\u2019s proposed emerging tier (~$1.5K\u2013$2.4K/yr). AA can compete below Foundant on price with comparable base features. <em>(Impact: price undercut)</em>"],
+t:["Deep word-of-mouth loyalty among US community foundations. Grant managers recommend to peers, creating organic growth hard to disrupt with marketing. <em>(Risk: referral network)</em>","Part of a broader family including Akoya (formerly Bromelkamp), adding government grantmaker capabilities. <em>(Risk: expanding portfolio)</em>","At $4.25K with unlimited users, Foundant\u2019s entry is genuinely competitive. AA must clearly articulate additional value (accelerator features, no lock-in, funding module). <em>(Risk: value justification)</em>"]},
+{n:"SM Apply",seg:"SMB–Mid",pr:"$4.8K–$18K/yr",v:"$10K verified deal",
+s:["SurveyMonkey brand gives instant credibility with buyers already in the SM ecosystem. The \u2018Apply\u2019 product benefits from parent brand trust even as a separate tool. <em>(Source: brand analysis)</em>","Clear tiering: 1 program (base), 10 (mid), unlimited (enterprise). SmarterSelect reports annual plans from $7K/yr; Capterra reviewer Alexander G. confirmed paying $10K for one year. <em>(Source: SmarterSelect, Capterra)</em>","Good fit for simple, single-program scholarships where the buyer needs basic submission, review, and selection without complexity. <em>(Source: Capterra reviews)</em>"],
+w:["Program caps are the #1 complaint. An accelerator running 5 programs must jump from the 1-program base (~$7K) to 10-program mid-tier (~$12K) \u2014 no in-between option. <em>(Source: Capterra, SmarterSelect)</em>","API access is enterprise-only, forcing any buyer needing CRM or website integration to the highest tier regardless of size. <em>(Source: apply.surveymonkey.com/pricing)</em>","Capterra reviewer Alexander G. paid $10,000 for one year and reported a failed implementation \u2014 never launched the platform, lost the full investment. Documented buyer risk. <em>(Source: Capterra)</em>"],
+o:["AA with unlimited programs at every tier directly counters SM Apply: $7K SM Apply (1 program) vs. ~$2.4K AA (unlimited) = 3x cost advantage. <em>(Impact: direct competitive win)</em>","Pre-award only \u2014 no disbursement, milestone, or compliance features. Buyers needing full lifecycle cannot stay on SM Apply alone. <em>(Impact: full-lifecycle advantage)</em>","Momentive (parent company) has been restructuring, and Apply\u2019s development velocity appears slowed. Fewer new features = opportunity for AA to overtake on functionality. <em>(Impact: competitive momentum)</em>"],
+t:["SM brand means Apply appears in every \u2018best grant management software\u2019 search result by default. AA needs strong SEO/AEO work (which you\u2019ve started) to compete for visibility. <em>(Risk: search visibility)</em>","For simple scholarship programs (1 form, basic review, select winners), SM Apply works well enough. AA needs to prove added value for simpler use cases. <em>(Risk: \u2018good enough\u2019 factor)</em>","Large scholarship customer base is sticky \u2014 low switching intent unless prices spike or features break. <em>(Risk: low churn = hard to poach)</em>"]},
+{n:"WizeHive",seg:"SMB–Mid",pr:"$1.4K–$10.6K/yr",v:"$4.5K median ACV",
+s:["Lowest verified floor in the category: Vendr shows deals as low as $1,400/yr, median $4,500, ceiling $10,600. Cheapest enterprise-grade GMS available. <em>(Source: Vendr buyer data)</em>","Flexible Zengine platform: custom workflows, forms, and data views. Community foundations use it as a configurable toolkit. <em>(Source: Tech Impact Consumer Guide)</em>","TrustRadius reviewers give solid marks for customer support responsiveness, particularly vs. SmartSimple and Bonterra where tickets take days. <em>(Source: TrustRadius)</em>"],
+w:["TrustRadius reviewer was charged $1,500 for adding a single short-term micro-grant feature they expected to be included. This surprise erodes trust and creates hesitancy about hidden costs. <em>(Source: TrustRadius review)</em>","Completely opaque pricing \u2014 no published tiers, no starting prices, no pricing page. Every buyer goes through a sales call, losing self-serve buyers to Good Grants and Dealum. <em>(Source: wizehive.com)</em>","Limited post-award depth: handles intake and review well but lacks Fluxx-level disbursement tracking, compliance enforcement, and audit trail. <em>(Source: Tech Impact feature comparison)</em>"],
+o:["Surprise add-ons create a trust vacuum AA can fill. Published pricing with clear \u2018what\u2019s included\u2019 docs positions AA as the honest alternative. <em>(Impact: trust positioning)</em>","$4,500 median ACV sits directly in AA\u2019s standard tier sweet spot ($5,343/yr in Kaled\u2019s model). This is the head-to-head competitor where AA must win on features + transparency. <em>(Impact: direct competition)</em>","Zengine is aging \u2014 reviewers mention dated UI and limited mobile. AA\u2019s modern design and Claude-powered tools are a tangible UX advantage. <em>(Impact: modernization argument)</em>"],
+t:["At $1,400/yr floor, WizeHive can undercut almost any GMS including AA\u2019s emerging tier. Budget buyers may choose purely on cost if AA can\u2019t differentiate on features. <em>(Risk: price floor competition)</em>","Vendr data is public \u2014 informed buyers know the floor is $1,400 and median is $4,500. This compresses margins for the entire segment. <em>(Risk: price transparency effect)</em>","For community foundations running simple scholarship programs, Zengine is flexible enough. AA needs to show clear value beyond what Zengine already delivers. <em>(Risk: \u2018good enough\u2019 factor)</em>"]},
+{n:"Affinity",seg:"Deal flow CRM",pr:"$2K–$2.7K/user/yr",v:"$62K renewal (10 ppl)",
+s:["Dominant in VC/PE deal flow \u2014 default CRM for VCs tracking pipelines. Relationship intelligence (auto-capturing emails, meetings, intros) has no GMS equivalent. <em>(Source: affinity.co, G2)</em>","Published pricing: Essential from $2,000/user/yr, Plus with advanced features. Clearer than most in the deal-flow space, though enterprise requires a call. <em>(Source: affinity.co/pricing)</em>","Prospeo documented a 10-person VC firm receiving a renewal quote of $62,000/yr \u2014 confirming $5,000\u2013$6,200/seat at Advanced/Enterprise tier. <em>(Source: Prospeo)</em>"],
+w:["Per-seat at $2K\u2013$6.2K/user punishes growing teams. A 15-person angel network at Advanced rates faces $75K\u2013$93K/yr for just CRM \u2014 before any grant tools. <em>(Source: Prospeo, affinity.co)</em>","Not a GMS \u2014 no grant lifecycle, compliance, disbursement, milestone, or audit features. Tracks relationships and deals, not grants. <em>(Source: affinity.co products)</em>","Investment-only focus: angel networks that also manage grants, run accelerators, or disburse funding need a completely separate tool alongside Affinity. <em>(Source: product analysis)</em>"],
+o:["Angel networks are the overlap market: they need deal flow + grant/funding management. AA can position as all-in-one, eliminating two subscriptions. <em>(Impact: bundle value for angel networks)</em>","10-person network paying $27K/yr for just CRM could get deal flow + funding from AA for less. Strong cost consolidation narrative. <em>(Impact: savings argument)</em>","Zero compliance, milestone, or disbursement features. Angel networks needing to track milestones, manage conditions, or report to LPs on deployment \u2014 AA fills this gap. <em>(Impact: functional differentiation)</em>"],
+t:["Affinity is deeply embedded in VC ecosystem \u2014 most angel networks already use it or have investors who recommend it. Switching CRM is painful. <em>(Risk: ecosystem lock-in)</em>","Adding AI features rapidly (relationship scoring, deal predictions). If they add basic grant tracking, the overlap narrows. <em>(Risk: feature expansion)</em>","For pure deal flow, Affinity is genuinely the best tool. AA should position as complement or upgrade, not replacement on CRM axis. <em>(Risk: wrong competitive axis)</em>"]},
+{n:"Dealum",seg:"Accelerator",pr:"$1.4K–$8.6K/yr",v:"Published tiers",
+s:["Purpose-built for accelerators and angel networks: deal flow, application tracking, mentor matching, portfolio monitoring. Closest functional competitor to AA in accelerator segment. <em>(Source: dealum.com)</em>","Transparent published pricing: Essentials $119/mo ($1,428/yr), Pro $384/mo ($4,608/yr), Premium $719/mo ($8,628/yr). Buyers self-qualify instantly. <em>(Source: dealum.com pricing)</em>","Lowest entry price in accelerator segment at $1,428/yr. Validates a real sub-$2K market for accelerator management tools \u2014 important for calibrating AA\u2019s emerging tier. <em>(Source: dealum.com)</em>"],
+w:["Small company, limited dev team. Feature releases are slower than larger competitors; enterprise features (SSO, API, custom integrations) are limited or absent. <em>(Source: product changelog)</em>","No GMS features: no grant lifecycle, disbursement tracking, compliance, milestone workflows, or audit trail. Manages applications and deals, not funding. <em>(Source: dealum.com features)</em>","No post-award sophistication: once a startup is selected, tracking is basic portfolio monitoring. No structured funding, compliance, or reporting workflow. <em>(Source: product analysis)</em>"],
+o:["Dealum\u2019s $1,428 floor confirms the emerging accelerator band. AA\u2019s proposed $1,520/yr (Kaled\u2019s emerging scenario) is directly competitive and market-validated. <em>(Impact: price validation)</em>","AA\u2019s functional moat is the entire GMS/funding module \u2014 disbursements, milestones, compliance, audit. Dealum can\u2019t match this without building an entirely new product. <em>(Impact: durable differentiation)</em>","Small team = slower feature velocity. AA can maintain advantage using Claude-powered dev tools to iterate faster on product and marketing. <em>(Impact: speed advantage)</em>"],
+t:["Most direct competitor in accelerator segment. They know AA exists and likely monitor feature releases and pricing. Public AA pricing will be compared immediately. <em>(Risk: direct competitive awareness)</em>","Could invest in grant/funding features over time. If they add basic disbursement tracking and compliance, differentiation narrows. <em>(Risk: feature convergence)</em>","Price transparency creates buyer benchmarks: if Dealum offers accelerator management at $1.4K, buyers question why AA\u2019s similar features cost more. Must communicate GMS value-add. <em>(Risk: price anchoring)</em>"]},
+{n:"Carta",seg:"Fund admin",pr:"Free–$77K+",v:"~$30K fund admin",
+s:["Free Launch tier for startups (<25 stakeholders, <$1M raised). This land-and-expand model made Carta the default cap table tool for early-stage companies. AA could adopt this strategy. <em>(Source: carta.com/plans)</em>","Dominant cap table: 40,000+ companies use Carta. When startups raise, investors often require Carta, creating a network effect. <em>(Source: carta.com)</em>","Fund admin ~$30K/yr for $10M AUM fund (per Substack analysis of 12+ emerging manager quotes). A real service, not just software \u2014 they handle accounting, tax, compliance. <em>(Source: Lidow PC Substack, PriceLevel)</em>"],
+w:["Not a GMS \u2014 manages equity, cap tables, 409A valuations, fund admin. No grant lifecycle, compliance workflow, milestone tracking, or disbursement management. <em>(Source: carta.com products)</em>","AUM-based fund admin pricing scales unpredictably. PriceLevel shows cap table at $2,730\u2013$3,900/yr (Grow tier), but fund admin jumps from $30K to $77K+ with AUM growth. <em>(Source: PriceLevel buyer data)</em>","Recent controversy around secondary market practices and data usage eroded trust among some VC firms, leading several to publicly switch to AngelList and Pulley. <em>(Source: industry reporting, VC Substack)</em>"],
+o:["Carta\u2019s free tier proves freemium works in startup/fund management. AA launching a free or very low-cost starter follows a validated playbook. <em>(Impact: freemium validation)</em>","Fund admins using Carta for cap tables who also manage grants or accelerators need a dedicated GMS. Carta doesn\u2019t offer this \u2014 AA fills the gap. <em>(Impact: complementary positioning)</em>","Pricing controversy and public departures create openness to evaluating alternatives for adjacent needs. AA can target the \u2018looking for alternatives\u2019 crowd. <em>(Impact: warm leads)</em>"],
+t:["Carta\u2019s 40,000+ company ecosystem means they could theoretically add grant management. Their engineering resources dwarf AA\u2019s. <em>(Risk: potential expansion)</em>","Strong relationships across founders, VCs, LPs, fund admins. This network effect doesn\u2019t exist for AA yet. <em>(Risk: ecosystem advantage)</em>","Brand trust in startup/venture community is very high despite controversies. An accelerator PM is more likely to have heard of Carta than AcceleratorApp. <em>(Risk: awareness gap)</em>"]}
+];
+
+const opps=[
+{t:"Transparent published pricing",d:"Only 4 of 11 competitors publish prices. Doing so signals confidence, reduces friction in the sales process, and builds trust with budget-conscious programs.",i:"high"},
+{t:"Unlimited users flat fee",d:"Fluxx wins competitive deals on this single feature. Accelerators with mentor pools and seasonal reviewers actively resent per-seat charges. Bundle unlimited users in every tier.",i:"high"},
+{t:"Unlimited programs included",d:"Good Grants and SurveyMonkey Apply gate programs at hard tier breaks (1 / 10 / unlimited). Removing this cap eliminates the most common upsell friction point in the category.",i:"high"},
+{t:"Free trial or freemium tier",d:"Only Good Grants has a 14-day trial. Only Carta has a true free tier. A self-serve starter would differentiate AcceleratorApp from every enterprise-positioned GMS.",i:"high"},
+{t:"Implementation fee transparency",d:"Implementation runs 50–100% of first-year license across the market but is never disclosed upfront. Publishing it builds procurement trust and sets realistic expectations.",i:"med"},
+{t:"Anti-lock-in contracts",d:"Most competitors require 2–3 year terms. Monthly or annual contracts with no lock-in would appeal to emerging programs testing a GMS solution for the first time.",i:"med"},
+{t:"Existing customer add-on path",d:"The 35% discount for existing AA customers is structurally sound and unique. No competitor publicly offers a transparent add-on pricing path for existing users.",i:"med"},
+{t:"Enterprise ceiling expansion",d:"Kaled's model caps at $70K/yr but Fluxx mid-size runs to $267K and SmartSimple to $200K. The real enterprise opportunity is 3–5x higher than the current pricing corridor.",i:"med"}
+];
+
+const feats={
+base:[{n:"Application intake + review",d:"Core workflow"},{n:"Funding program setup",d:"Create rounds"},{n:"Recipient tracking",d:"Award records"},{n:"Basic disbursements",d:"Payment status"},{n:"Basic compliance",d:"Doc requirements"},{n:"Basic milestones",d:"Status + evidence"},{n:"Unlimited users",d:"Key differentiator"},{n:"Unlimited programs",d:"No caps"},{n:"Standard reporting",d:"Program dashboards"}],
+variable:[{n:"Annual funding volume",d:"Value proxy"},{n:"Active awards / recipients",d:"Workload driver"},{n:"Workflow complexity",d:"Simple → complex"},{n:"Reporting depth",d:"Basic → portfolio"},{n:"Internal user roles",d:"Role specialization"},{n:"Disbursement tranches",d:"Multi-tranche load"}],
+fixed:[{n:"Milestone-linked disbursements",d:"Premium"},{n:"Multi-step approvals",d:"Premium"},{n:"Amendment workflows",d:"Premium"},{n:"Advanced compliance logic",d:"Premium"},{n:"Evidence collection",d:"Premium"},{n:"Clarification loops",d:"Premium"},{n:"SSO / SAML",d:"Enterprise"},{n:"API access",d:"Enterprise"},{n:"Data residency / on-prem",d:"Enterprise"},{n:"Custom integrations",d:"Enterprise"},{n:"Portfolio oversight",d:"Enterprise"},{n:"Advanced security + audit",d:"Enterprise"}]
+};
+
+let view='swot', ci=0, quad='s';
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
+
+function renderNav(){
+  const el=$('#nav');
+  el.innerHTML='';
+  [{k:'swot',l:'Competitor SWOT'},{k:'opps',l:'Opportunities'},{k:'feats',l:'Feature pricing'}].forEach(v=>{
+    const b=document.createElement('button');
+    b.textContent=v.l;
+    b.className=v.k===view?'active':'';
+    b.onclick=()=>{view=v.k;render()};
+    el.appendChild(b);
+  });
+}
+
+function renderSwot(){
+  const pills=$('#compPills');
+  pills.innerHTML='';
+  C.forEach((c,i)=>{
+    const b=document.createElement('button');
+    b.textContent=c.n;
+    b.className=i===ci?'active':'';
+    b.onclick=()=>{ci=i;quad='s';render()};
+    pills.appendChild(b);
+  });
+
+  const c=C[ci];
+  $('#compCard').innerHTML=`<div class="comp-card animate-in"><div class="comp-card-top"><div><div class="comp-name">${c.n}</div><div class="comp-seg">${c.seg}</div></div><div class="comp-price-block"><div class="comp-price-main">${c.pr}</div><div class="comp-price-sub">${c.v}</div></div></div></div>`;
+
+  const tabs=$('#quadTabs');
+  tabs.innerHTML='';
+  [{k:'s',l:'Strengths'},{k:'w',l:'Weaknesses'},{k:'o',l:'Opportunities'},{k:'t',l:'Threats'}].forEach(q=>{
+    const b=document.createElement('button');
+    b.textContent=q.l;
+    b.className='quad-tab'+(q.k===quad?' active-'+q.k:'');
+    b.onclick=()=>{quad=q.k;render()};
+    tabs.appendChild(b);
+  });
+
+  const items=c[quad];
+  $('#quadContent').innerHTML=`<div class="quad-content q-${quad} animate-in">${items.map(x=>`<div class="quad-item"><div class="quad-dot"></div><span>${x}</span></div>`).join('')}</div>`;
+}
+
+function renderOpps(){
+  $('#oppGrid').innerHTML=opps.map(o=>`<div class="opp-card ${o.i} animate-in"><span class="opp-tag ${o.i}">${o.i==='high'?'High impact':'Medium impact'}</span><div class="opp-title">${o.t}</div><div class="opp-desc">${o.d}</div></div>`).join('');
+}
+
+function renderFeats(){
+  const sections=[
+    {k:'base',l:'Base features — included in every tier',items:feats.base},
+    {k:'variable',l:'Variable-priced — scales with organizational complexity',items:feats.variable},
+    {k:'fixed',l:'Fixed premium — tier-gated, not usage-based',items:feats.fixed}
+  ];
+  $('#featContent').innerHTML=sections.map(s=>`<div class="feat-section animate-in"><div class="feat-section-title">${s.l}</div><div class="feat-grid">${s.items.map(f=>`<div class="feat-item ${s.k}"><div class="feat-name">${f.n}</div><div class="feat-note">${f.d}</div>${s.k==='fixed'?`<span class="feat-tier">${f.d}</span>`:''}</div>`).join('')}</div></div>`).join('');
+}
+
+function render(){
+  renderNav();
+  ['swot','opps','feats'].forEach(v=>{
+    const el=$(`#view-${v}`);
+    el.classList.toggle('active',v===view);
+  });
+  if(view==='swot')renderSwot();
+  else if(view==='opps')renderOpps();
+  else renderFeats();
+}
+
+render();
+</script>
+</body>
+</html>
