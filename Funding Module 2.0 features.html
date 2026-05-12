@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcceleratorApp — Funding Module Feature Differentiation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAFAF8;--card:#FFF;--surface:#F3F2EE;--surface2:#ECEAE4;--t1:#1A1A18;--t2:#6B6B65;--t3:#9C9C95;--t4:#BFBFB8;--brd:rgba(0,0,0,.08);--accent:#1D4ED8;--accent-bg:#EFF4FF;--green:#0F766E;--green-bg:#ECFDF5;--purple:#6D28D9;--purple-bg:#F5F3FF;--coral:#C2410C;--coral-bg:#FFF7ED;--amber:#92400E;--amber-bg:#FFFBEB;--r:10px;--rl:14px;--sans:'DM Sans',sans-serif;--display:'Fraunces',Georgia,serif}
+@media(prefers-color-scheme:dark){:root{--bg:#121210;--card:#1C1C19;--surface:#242420;--surface2:#2E2E2A;--t1:#EDEDE8;--t2:#9C9C95;--t3:#6B6B65;--t4:#444441;--brd:rgba(255,255,255,.08);--accent:#6B9AFF;--accent-bg:rgba(107,154,255,.1);--green-bg:rgba(15,118,110,.1);--green:#5EEAD4;--purple-bg:rgba(109,40,217,.1);--purple:#C4B5FD;--coral-bg:rgba(194,65,12,.1);--coral:#FDBA74;--amber-bg:rgba(146,64,14,.1);--amber:#FCD34D}}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:40px 28px 80px}
+h1{font-family:var(--display);font-size:28px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}h2{font-family:var(--display);font-size:20px;font-weight:600;margin-bottom:16px}h3{font-size:15px;font-weight:500;margin-bottom:12px}
+.sub{color:var(--t2);font-size:14px;margin-bottom:32px}a{color:var(--accent);text-decoration:none}
+.label-update{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:var(--green-bg);color:var(--green);margin-left:6px;vertical-align:middle}
+.back{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--t2);margin-bottom:24px;padding:6px 12px;border:.5px solid var(--brd);border-radius:7px;transition:.2s}.back:hover{border-color:var(--t3);color:var(--t1)}
+.tabs{display:flex;gap:4px;padding:4px;border-radius:var(--r);background:var(--surface);width:fit-content;margin-bottom:32px;flex-wrap:wrap}.tab{padding:9px 22px;border:none;border-radius:7px;font-family:var(--sans);font-size:13px;cursor:pointer;background:transparent;color:var(--t2);transition:.2s}.tab.on{background:var(--card);color:var(--t1);font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,.06)}.view{display:none}.view.on{display:block}
+.note{background:var(--surface);border-radius:var(--r);padding:14px 18px;font-size:13px;color:var(--t2);line-height:1.65;margin-bottom:24px}.note b{color:var(--t1)}
+.feat-table{width:100%;border-collapse:collapse;font-size:12px}.feat-table th{text-align:left;padding:8px 12px;font-weight:500;font-size:12px;background:var(--surface);position:sticky;top:0;z-index:2}.feat-table th:not(:first-child){text-align:center}.feat-table td{padding:7px 12px;border-top:.5px solid var(--brd);vertical-align:middle}.feat-table td:not(:first-child){text-align:center}.feat-table .cat{font-weight:500;background:var(--surface);font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:.04em;padding:6px 12px}
+.ck{color:var(--green);font-size:14px}.xx{color:var(--t4);font-size:12px}
+.pill{display:inline-block;font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;margin-left:4px;vertical-align:middle}.pill-g{background:var(--green-bg);color:var(--green)}.pill-p{background:var(--purple-bg);color:var(--purple)}.pill-a{background:var(--accent-bg);color:var(--accent)}.pill-c{background:var(--coral-bg);color:var(--coral)}
+.th-aa{background:var(--accent-bg) !important;color:var(--accent)}.td-aa{background:rgba(29,78,216,.02)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0 28px;font-size:12px;color:var(--t2)}.legend span{display:flex;align-items:center;gap:4px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{background:var(--card);border:.5px solid var(--brd);border-radius:var(--rl);padding:18px 16px}
+.meta{margin-top:12px;padding:10px 12px;border-radius:var(--r);background:var(--surface);font-size:11px;color:var(--t2);line-height:1.55}.meta b{font-weight:500;color:var(--t1)}
+@media(max-width:768px){.grid3{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}.tabs{width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a href="index.html" class="back">← Back to pricing models</a>
+<h1>Feature differentiation <span class="label-update">Updated May 12</span></h1>
+<p class="sub">Feature-unlock model: the Funding Module unlocks capabilities. Admin seats are separate (€59/mo each). Compliance → Professional+. Capital calls → Enterprise.</p>
+
+<div class="tabs" id="tabs"></div>
+
+<!-- TAB 1: OUR TIERS -->
+<div class="view on" id="v1">
+<div class="note"><b>Funding Module tiers — feature unlock.</b> Seats are not bundled. Green <span class="pill pill-g">Moved</span> and <span class="pill pill-p">New</span> badges highlight changes from recent decisions.</div>
+
+<div style="overflow-x:auto;border:.5px solid var(--brd);border-radius:var(--rl);margin-bottom:16px"><table class="feat-table" style="min-width:800px"><thead><tr>
+<th style="width:32%">Feature</th>
+<th class="th-aa" style="width:17%">FM Essential<br><span style="font-weight:400;font-size:11px">€299/mo</span></th>
+<th class="th-aa" style="width:17%">FM Professional<br><span style="font-weight:400;font-size:11px">€599/mo</span></th>
+<th class="th-aa" style="width:17%">FM Enterprise<br><span style="font-weight:400;font-size:11px">Contact Sales</span></th>
+<th style="width:17%">AA Bundles<br><span style="font-weight:400;font-size:11px">(no FM)</span></th>
+</tr></thead><tbody>
+
+<tr><td class="cat" colspan="5">Core — Application & Intake</td></tr>
+<tr><td>Online application forms</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Multi-stage review workflows</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Reviewer scoring & rubrics</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Unlimited evaluators / reviewers</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+
+<tr><td class="cat" colspan="5">Funding Management</td></tr>
+<tr><td>Funding program setup</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Funding rounds</td><td class="td-aa" style="color:var(--amber)">1</td><td class="td-aa" style="color:var(--amber)">5</td><td class="td-aa ck">∞</td><td class="xx">—</td></tr>
+<tr><td>Recipient / awardee tracking</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Disbursement tracking</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Disbursement tranches</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Milestone tracking</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Budget management</td><td class="td-aa" style="font-size:11px">Basic</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Investor tracking <span class="pill pill-p">New</span></td><td class="td-aa xx">—</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Capital call management <span class="pill pill-p">New</span></td><td class="td-aa xx">—</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+
+<tr><td class="cat" colspan="5">Compliance & Governance <span class="pill pill-g">Moved to Pro+</span></td></tr>
+<tr><td>Compliance & due diligence <span class="pill pill-g">Moved</span></td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Audit logs <span class="pill pill-g">New</span></td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Amendment workflows</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Multi-step approval workflows</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Evidence collection workflows</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+
+<tr><td class="cat" colspan="5">Reporting & Dashboards</td></tr>
+<tr><td>Standard reporting dashboard</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Advanced reporting / BI</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Multi-program dashboards</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Portfolio oversight</td><td class="td-aa xx">—</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Custom report builder</td><td class="td-aa xx">—</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+
+<tr><td class="cat" colspan="5">Onboarding & Support</td></tr>
+<tr><td>Dedicated onboarding & SLA <span class="pill pill-g">All tiers</span></td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+
+<tr><td class="cat" colspan="5">Infrastructure & Security</td></tr>
+<tr><td>SSO / SAML</td><td class="td-aa xx">—</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>API access</td><td class="td-aa xx">—</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Data residency</td><td class="td-aa xx">—</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Standard integrations (CRM, accounting)</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Custom integrations (ERP, NetSuite, SF)</td><td class="td-aa xx">—</td><td class="td-aa xx">—</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td></tr>
+
+<tr><td class="cat" colspan="5">Pricing variables <span class="pill pill-c">Feature-unlock model</span></td></tr>
+<tr><td>Admin seats</td><td class="td-aa" colspan="3" style="text-align:center;color:var(--coral);font-weight:500;font-size:11px">NOT bundled — €59/mo each (separate from FM tier)</td><td>2 incl.</td></tr>
+<tr><td>Funding programs</td><td class="td-aa">3</td><td class="td-aa">10</td><td class="td-aa">∞</td><td>3–5</td></tr>
+<tr><td>Fund under management cap</td><td class="td-aa">$2M</td><td class="td-aa">$20M</td><td class="td-aa">∞</td><td>—</td></tr>
+<tr><td>Funding rounds</td><td class="td-aa">1</td><td class="td-aa">5</td><td class="td-aa">∞</td><td>—</td></tr>
+<tr><td>Existing customer discount (on FM tier)</td><td class="td-aa">35%</td><td class="td-aa">35%</td><td class="td-aa">35%</td><td>—</td></tr>
+
+</tbody></table></div>
+<div class="legend">
+<span><span class="ck" style="font-size:14px">&#10003;</span> Included</span>
+<span><span class="xx">—</span> Not available</span>
+<span style="color:var(--amber)">N = Capped</span>
+<span class="pill pill-g">Moved</span> <span style="font-size:11px">Feature moved tier</span>
+<span class="pill pill-p">New</span> <span style="font-size:11px">Newly added</span>
+<span class="pill pill-c">Seats separate</span>
+</div>
+</div>
+
+<!-- TAB 2: VS COMPETITORS -->
+<div class="view" id="v2">
+<div class="note"><b>Competitive comparison.</b> AcceleratorApp Funding Module vs. 6 key competitors. Note: AA pricing shown is feature-only (seats additional), while most competitors include seats or use flat-fee models.</div>
+
+<div style="overflow-x:auto;border:.5px solid var(--brd);border-radius:var(--rl);margin-bottom:16px"><table class="feat-table" style="min-width:900px"><thead><tr>
+<th style="width:20%">Capability</th>
+<th class="th-aa" style="width:12%">AcceleratorApp</th>
+<th style="width:11%">Submittable</th>
+<th style="width:11%">Good Grants</th>
+<th style="width:11%">Fluxx</th>
+<th style="width:12%">SmartSimple</th>
+<th style="width:11%">Foundant</th>
+<th style="width:12%">Dealum</th>
+</tr></thead><tbody>
+
+<tr><td class="cat" colspan="8">Pricing model</td></tr>
+<tr><td>Published pricing</td><td class="td-aa ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td></tr>
+<tr><td>Seat pricing model</td><td class="td-aa" style="font-size:10px;color:var(--accent);font-weight:500">€59/seat separate</td><td style="font-size:10px">Per-seat bundled</td><td style="font-size:10px">Flat fee</td><td style="font-size:10px">Flat fee</td><td style="font-size:10px">Metered</td><td style="font-size:10px">Flat fee</td><td style="font-size:10px">Flat fee</td></tr>
+<tr><td>Existing client discount</td><td class="td-aa ck" style="color:var(--green);font-size:11px;font-weight:500">35%</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td></tr>
+
+<tr><td class="cat" colspan="8">Grant lifecycle</td></tr>
+<tr><td>Application intake</td><td class="td-aa ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td></tr>
+<tr><td>Post-award tracking</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Disbursement management</td><td class="td-aa ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Milestone tracking</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td></tr>
+<tr><td>Compliance / audit <span class="pill pill-g">Pro+</span></td><td class="td-aa" style="font-size:11px;color:var(--accent)">Pro+</td><td style="font-size:11px;color:var(--t2)">Ent</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td></tr>
+<tr><td>Amendment workflows</td><td class="td-aa" style="font-size:11px;color:var(--accent)">Pro+</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td class="xx">—</td></tr>
+
+<tr><td class="cat" colspan="8">Differentiators (AA unique)</td></tr>
+<tr><td>Mentorship management</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td></tr>
+<tr><td>Online learner / LMS</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td></tr>
+<tr><td>Community features</td><td class="td-aa ck">&#10003;</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td></tr>
+<tr><td>Capital call management <span class="pill pill-p">New</span></td><td class="td-aa" style="font-size:11px;color:var(--purple)">Ent</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td></tr>
+<tr><td>Investor tracking <span class="pill pill-p">New</span></td><td class="td-aa" style="font-size:11px;color:var(--purple)">Ent</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td></tr>
+<tr><td>Dedicated onboarding (all tiers) <span class="pill pill-g">All</span></td><td class="td-aa ck">&#10003;</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td><td class="xx">—</td></tr>
+
+<tr><td class="cat" colspan="8">Verified annual pricing (feature-only for AA, total for competitors)</td></tr>
+<tr><td>Entry / SMB (feature only)</td><td class="td-aa" style="font-weight:600;color:var(--accent)">€3,588</td><td>$4,800+</td><td>$3,750</td><td>$13,500+</td><td>$6,000+</td><td>$4,250</td><td>$1,428</td></tr>
+<tr><td>+ 3 seats (total)</td><td class="td-aa" style="font-weight:600;color:var(--accent)">€5,712</td><td colspan="6" style="font-size:11px;color:var(--t3);text-align:center">Competitor prices above include seats</td></tr>
+<tr><td>Mid-market (feature only)</td><td class="td-aa" style="font-weight:600;color:var(--accent)">€7,188</td><td>$10,000+</td><td>$7,500</td><td>$25,000+</td><td>$50,000+</td><td>$9,500</td><td>$4,608</td></tr>
+<tr><td>+ 7 seats (total)</td><td class="td-aa" style="font-weight:600;color:var(--accent)">€12,144</td><td colspan="6" style="font-size:11px;color:var(--t3);text-align:center">Competitor prices above include seats</td></tr>
+<tr><td>Enterprise (feature only, floor)</td><td class="td-aa" style="font-weight:600;color:var(--accent)">€42,000+</td><td>$18,000+</td><td>—</td><td>$70,000+</td><td>$200,000+</td><td>—</td><td>$8,628</td></tr>
+
+</tbody></table></div>
+<div class="legend">
+<span><span class="ck" style="font-size:14px">&#10003;</span> All tiers</span>
+<span style="color:var(--accent);font-size:11px;font-weight:500">Pro+</span> <span>Professional & above</span>
+<span style="color:var(--purple);font-size:11px;font-weight:500">Ent</span> <span>Enterprise only</span>
+<span><span class="xx">—</span> Not available</span>
+</div>
+
+<h3 style="margin-top:12px">Key competitive advantages</h3>
+<div class="grid3" style="margin-bottom:28px">
+<div class="card"><b style="font-size:13px">Only combined platform</b><div class="meta" style="margin-top:8px">No competitor offers accelerator management (mentoring, LMS, community) + grant management in one product. Fluxx/SmartSimple are funding-only.</div></div>
+<div class="card"><b style="font-size:13px">Capital calls = no competitor</b><div class="meta" style="margin-top:8px">Capital call management and investor tracking are Enterprise-only features that no GMS competitor offers. Key differentiator for VC/angel network segment.</div></div>
+<div class="card"><b style="font-size:13px">Seat revenue preserved</b><div class="meta" style="margin-top:8px">Feature-unlock model means FM revenue is 100% incremental. Competitors bundle seats, so their price includes seat value. Our seat revenue (€59/mo each) stays untouched.</div></div>
+</div>
+</div>
+
+<!-- TAB 3: PRICE COMPARISON -->
+<div class="view" id="v3">
+<div class="note"><b>Price comparison — feature-unlock model.</b> All AA prices now show feature cost + seat cost separately. Total is always competitive even with seats unbundled.</div>
+
+<div style="overflow-x:auto;border:.5px solid var(--brd);border-radius:var(--rl);margin-bottom:28px"><table class="feat-table" style="min-width:800px"><thead><tr>
+<th style="width:20%">Scenario</th>
+<th style="width:12%">FM fee/yr</th>
+<th style="width:12%">Seats/yr</th>
+<th style="width:12%">AA total/yr</th>
+<th style="width:16%">Closest competitor</th>
+<th style="width:12%">Comp. price</th>
+<th style="width:16%">AA advantage</th>
+</tr></thead><tbody>
+<tr><td>S1: FM Essential + 3 seats</td><td>€3,588</td><td>€2,124</td><td style="font-weight:500">€5,712</td><td>Good Grants</td><td>$3,750</td><td style="font-size:11px;color:var(--t2)">AA has full lifecycle; Good Grants no disbursements</td></tr>
+<tr><td>S1: FM Pro + 7 seats</td><td>€7,188</td><td>€4,956</td><td style="font-weight:500">€12,144</td><td>Submittable</td><td>$10,000</td><td style="font-size:11px;color:var(--t2)">AA has compliance, audit logs, milestones</td></tr>
+<tr><td>S2: AA Ess + FM Pro + 7 seats</td><td>€13,776</td><td>€3,540</td><td style="font-weight:500">€17,316</td><td>Fluxx (FL Sports)</td><td>$25,000</td><td style="font-size:11px;color:var(--t2)">AA 30% cheaper WITH accelerator platform</td></tr>
+<tr><td>S3: Ess + FM Pro (35% off)</td><td>€11,244</td><td>€2,124</td><td style="font-weight:500">€13,368</td><td>Fluxx small</td><td>$13,500+</td><td style="font-size:11px;color:var(--t2)">AA includes full platform at Fluxx's floor</td></tr>
+<tr><td style="font-weight:500;color:var(--accent)">CAFI: FM Pro + 9 seats</td><td style="color:var(--accent)">€7,188</td><td style="color:var(--accent)">€6,372</td><td style="font-weight:600;color:var(--accent)">€13,560</td><td>Fluxx small</td><td>$13,500+</td><td style="font-size:11px;color:var(--green);font-weight:500">Competitive at Fluxx entry, but with full lifecycle</td></tr>
+</tbody></table></div>
+</div>
+
+</div>
+
+<script>
+const tabs=[{id:'v1',label:'Our tiers'},{id:'v2',label:'vs. Competitors'},{id:'v3',label:'Price summary'}];
+let cur='v1';
+function renderTabs(){const el=document.getElementById('tabs');el.innerHTML='';tabs.forEach(t=>{const b=document.createElement('button');b.textContent=t.label;b.className='tab'+(t.id===cur?' on':'');b.onclick=()=>{cur=t.id;renderTabs();document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id===cur))};el.appendChild(b)})}
+renderTabs();
+</script>
+</body>
+</html>
