@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,20 +24,36 @@
 .seg-card{background:var(--card);border:.5px solid var(--brd);border-radius:var(--rl);padding:18px 16px}.seg-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}.seg-title{font-size:14px;font-weight:500;margin-bottom:4px}.seg-desc{font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:10px}.seg-meta{display:flex;flex-wrap:wrap;gap:4px}.seg-tag{font-size:10px;padding:3px 8px;border-radius:20px;background:var(--surface);color:var(--t2);border:.5px solid var(--brd)}
 .pill{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px}.pill-g{background:var(--green-bg);color:var(--green)}.pill-p{background:var(--purple-bg);color:var(--purple)}.pill-a{background:var(--accent-bg);color:var(--accent)}.pill-c{background:var(--coral-bg);color:var(--coral)}
 .feat-table{width:100%;border-collapse:collapse;font-size:12px}.feat-table th{text-align:left;padding:8px 12px;font-weight:500;font-size:12px;background:var(--surface);position:sticky;top:0}.feat-table th:not(:first-child){text-align:center}.feat-table td{padding:7px 12px;border-top:.5px solid var(--brd);vertical-align:middle}.feat-table td:not(:first-child){text-align:center}.feat-table .cat{font-weight:500;background:var(--surface);font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:.04em;padding:6px 12px}.ck{color:var(--green);font-size:14px}.xx{color:var(--t4);font-size:12px}
-@media(max-width:768px){.grid3{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}.tabs{width:100%}}
+.seat-compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}.seat-box{padding:16px;border-radius:var(--r);text-align:center}.seat-box .seat-price{font-size:24px;font-weight:500;margin:6px 0 2px}.seat-box .seat-label{font-size:11px;color:var(--t2)}.seat-box .seat-desc{font-size:11px;color:var(--t3);margin-top:4px}
+@media(max-width:768px){.grid3{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}.tabs{width:100%}.seat-compare{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<h1>Funding module — pricing strategy <span class="label-update">Updated May 12</span></h1>
-<p class="sub">Feature-unlock model: the Funding Module unlocks capabilities on top of existing admin seats. Seats are not bundled — they remain governed by the platform plan.</p>
+<h1>Funding module — pricing strategy <span class="label-update">Updated May 15</span></h1>
+<p class="sub">Feature-unlock model: the Funding Module unlocks capabilities in the FM environment. FM admin seats ($25/mo) are separate from platform seats (€59/mo).</p>
 
-<!-- PRICING MODEL EXPLAINER -->
-<div class="note" style="margin-bottom:16px;border-left:3px solid var(--accent)"><b>Pricing model — Feature Unlock (Option B):</b> The Funding Module is a <b>capability unlock</b>, not a seat plan. It adds funding features to whatever admin seats the customer already has. Seats continue to be priced at €59/mo each through the platform plan. This preserves seat revenue and avoids giving away consumer surplus.</div>
+<!-- TWO SEAT TYPES EXPLAINER -->
+<div class="seat-compare">
+<div class="seat-box" style="background:var(--accent-bg);border:1px solid rgba(29,78,216,.15)">
+<div style="font-size:11px;font-weight:500;color:var(--accent)">PLATFORM SEAT</div>
+<div class="seat-price" style="color:var(--accent)">€59<span style="font-size:13px;font-weight:400">/mo</span></div>
+<div class="seat-label">Covers: ATS, Mentoring, Community, LMS — everything</div>
+<div class="seat-desc">Priced in EUR · Managed through AA platform plan</div>
+</div>
+<div class="seat-box" style="background:var(--coral-bg);border:1px solid rgba(194,65,12,.15)">
+<div style="font-size:11px;font-weight:500;color:var(--coral)">FM ADMIN SEAT</div>
+<div class="seat-price" style="color:var(--coral)">$25<span style="font-size:13px;font-weight:400">/mo</span></div>
+<div class="seat-label">Covers: Funding Module environment only</div>
+<div class="seat-desc">Priced in USD · Separate from platform seats</div>
+</div>
+</div>
+
+<div class="note" style="margin-bottom:16px;border-left:3px solid var(--accent)"><b>Pricing model — Feature Unlock (Option B):</b> The Funding Module is a <b>capability unlock</b> priced in USD. FM admin seats ($25/mo) grant access to the funding environment only. Platform seats (€59/mo) remain separate and cover all non-FM modules. A user who needs both pays both.</div>
 
 <div class="note" style="margin-bottom:16px;border-left:3px solid var(--green)"><b>Terminology:</b> "GMS" = complete suite (ATS + Funding Module). The add-on is the <b>Funding Module</b>. Compliance → Professional+. Audit logs → Professional+. Capital calls + investor tracking → Enterprise.</div>
 
-<div class="note" style="margin-bottom:28px;border-left:3px solid var(--coral)"><b>Seat economics:</b> Current AA seat price = €59/mo. A customer with 10 seats pays €590/mo in seats alone. Under the old model (10 seats bundled in FM Pro at €599/mo), the entire Funding Module was essentially free. Under this model, €599/mo is pure feature revenue on top of seat revenue.</div>
+<div class="note" style="margin-bottom:28px;border-left:3px solid var(--coral)"><b>Why two seat types?</b> Platform seats at €59/mo represent significant per-seat revenue. Bundling them into FM would give away consumer surplus. FM admin seats at $25/mo make the FM accessible while keeping platform seat economics intact. Customers who only need funding (no ATS) pay $25/seat. Customers who need both pay €59 + $25 = ~$84/user.</div>
 
 <!-- SEGMENTS -->
 <h2>Target customer segments</h2>
@@ -50,13 +67,13 @@
 
 <!-- ═══ S1: NEW — FM ONLY ═══ -->
 <div class="view on" id="v1">
-<div class="note"><b>Scenario 1 — New customer, Funding Module only.</b> Foundation, government agency, or grant-making org. They buy the Funding Module as a standalone product + admin seats at €59/mo each.</div>
+<div class="note"><b>Scenario 1 — New customer, Funding Module only.</b> Foundation, government agency, or grant-making org. No platform plan needed. They buy the FM tier + FM admin seats at $25/mo each. Everything in USD.</div>
 <div class="grid3" style="margin-bottom:32px">
 
 <div class="card top-gray">
 <div class="tier-label">Funding Module — Essential <span class="pill pill-g">Seg A</span></div>
-<div class="price">€299<span class="price-unit">/mo</span></div>
-<div class="price-sub">€3,588/yr · + seats at €59/mo each</div>
+<div class="price">$299<span class="price-unit">/mo</span></div>
+<div class="price-sub">$3,588/yr · + FM seats at $25/mo each</div>
 <div class="fl">
 <div class="fl-row fl-head">Features unlocked:</div>
 <div class="fl-row">Up to $2M fund under management</div>
@@ -74,9 +91,9 @@
 <div class="fl-row" style="color:var(--t3)">No compliance / audit logs / API / SSO</div>
 </div>
 <div class="fl fl-section">
-<div class="fl-row fl-head">Seats:</div>
-<div class="fl-row">Admin seats billed separately at €59/mo each</div>
-<div class="fl-row">No seats bundled — pay only for what you need</div>
+<div class="fl-row fl-head">FM admin seats:</div>
+<div class="fl-row">$25/mo per FM admin — FM environment only</div>
+<div class="fl-row">Does not include platform access (ATS, mentoring, etc.)</div>
 </div>
 <div class="meta"><b>Competitors:</b> Good Grants $3,750 · Dealum $1,428 · WizeHive $4,500 · Foundant $4,250</div>
 </div>
@@ -84,8 +101,8 @@
 <div class="card pop">
 <div class="badge">Most popular</div>
 <div class="tier-label" style="margin-top:8px">Funding Module — Professional <span class="pill pill-a">Seg B</span></div>
-<div class="price">€599<span class="price-unit">/mo</span></div>
-<div class="price-sub">€7,188/yr · + seats at €59/mo each</div>
+<div class="price">$599<span class="price-unit">/mo</span></div>
+<div class="price-sub">$7,188/yr · + FM seats at $25/mo each</div>
 <div class="fl">
 <div class="fl-row fl-head">Everything in Essential, plus:</div>
 <div class="fl-row">Up to $20M fund under management</div>
@@ -102,8 +119,8 @@
 <div class="fl-row">Dedicated onboarding & SLA</div>
 </div>
 <div class="fl fl-section">
-<div class="fl-row fl-head">Seats:</div>
-<div class="fl-row">Admin seats billed separately at €59/mo each</div>
+<div class="fl-row fl-head">FM admin seats:</div>
+<div class="fl-row">$25/mo per FM admin</div>
 </div>
 <div class="meta"><b>Competitors:</b> Submittable $10K · SM Apply $7K+ · Foundant $9.5K · Fluxx small $13.5K</div>
 </div>
@@ -111,7 +128,7 @@
 <div class="card top-green">
 <div class="tier-label">Funding Module — Enterprise <span class="pill pill-p">Seg C</span></div>
 <div class="price">Contact Sales</div>
-<div class="price-sub">Internal floor: €3,500/mo (€42,000/yr) · + seats</div>
+<div class="price-sub">Internal floor: $3,500/mo ($42,000/yr) · + FM seats</div>
 <div class="fl">
 <div class="fl-row fl-head">Everything in Professional, plus:</div>
 <div class="fl-row">Unlimited fund volume, programs & rounds</div>
@@ -124,38 +141,38 @@
 <div class="fl-row">Dedicated onboarding & SLA</div>
 </div>
 <div class="fl fl-section">
-<div class="fl-row fl-head">Seats:</div>
-<div class="fl-row">Admin seats negotiated or at standard rate</div>
+<div class="fl-row fl-head">FM admin seats:</div>
+<div class="fl-row">$25/mo per FM admin or negotiated at volume</div>
 </div>
 <div class="meta"><b>Competitors:</b> Fluxx $25K–$267K · SmartSimple $50K–$200K · Bonterra $50K+</div>
 </div>
 </div>
 
-<h3>Cost examples — new Funding Module customers (feature unlock + seats)</h3>
+<h3>Cost examples — new FM-only customers (feature + FM seats, all USD)</h3>
 <div class="grid3" style="margin-bottom:32px">
-<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--t3)"></div><div class="scenario-title">Small foundation (Seg A)</div></div><div class="scenario-desc">3 admins, 3 programs, under $2M</div>
+<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--t3)"></div><div class="scenario-title">Small foundation (Seg A)</div></div><div class="scenario-desc">3 FM admins, 3 programs, under $2M</div>
 <table class="cost-table">
-<tr><td class="label">FM Essential (features)</td><td class="val">€299/mo</td></tr>
-<tr><td class="label">3 admin seats × €59</td><td class="val">€177/mo</td></tr>
-<tr class="total-row"><td>Total</td><td class="val">€476/mo · €5,712/yr</td></tr>
+<tr><td class="label">FM Essential (features)</td><td class="val">$299/mo</td></tr>
+<tr><td class="label">3 FM admin seats × $25</td><td class="val">$75/mo</td></tr>
+<tr class="total-row"><td>Total</td><td class="val">$374/mo · $4,488/yr</td></tr>
 </table>
-<div class="meta"><b>vs.</b> Good Grants €3,475/yr (no disbursements). Foundant €3,931–€8,789/yr (2yr lock-in). AA is mid-range but with full lifecycle + dedicated onboarding.</div></div>
+<div class="meta"><b>vs.</b> Good Grants $3,750/yr (no disbursements). Foundant $3,931–$8,789/yr (2yr lock-in). AA is competitive with full lifecycle + dedicated onboarding.</div></div>
 
-<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--accent)"></div><div class="scenario-title">Mid grantmaker (Seg B)</div></div><div class="scenario-desc">7 admins, 8 programs, $5M managed</div>
+<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--accent)"></div><div class="scenario-title">Mid grantmaker (Seg B)</div></div><div class="scenario-desc">7 FM admins, 8 programs, $5M managed</div>
 <table class="cost-table">
-<tr><td class="label">FM Professional (features)</td><td class="val">€599/mo</td></tr>
-<tr><td class="label">7 admin seats × €59</td><td class="val">€413/mo</td></tr>
-<tr class="total-row"><td>Total</td><td class="val">€1,012/mo · €12,144/yr</td></tr>
+<tr><td class="label">FM Professional (features)</td><td class="val">$599/mo</td></tr>
+<tr><td class="label">7 FM admin seats × $25</td><td class="val">$175/mo</td></tr>
+<tr class="total-row"><td>Total</td><td class="val">$774/mo · $9,288/yr</td></tr>
 </table>
-<div class="meta"><b>vs.</b> Submittable $10K/yr (no disbursements). Fluxx entry $13.5K + $23K impl. AA provides full lifecycle + compliance + audit logs at competitive price.</div></div>
+<div class="meta"><b>vs.</b> Submittable $10K/yr (no disbursements). Fluxx entry $13.5K + $23K impl. AA provides full lifecycle + compliance + audit logs for less.</div></div>
 
-<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--green)"></div><div class="scenario-title">Large public-sector (Seg C)</div></div><div class="scenario-desc">15 admins, 12 programs, $50M+, SSO, capital calls</div>
+<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--green)"></div><div class="scenario-title">Large public-sector (Seg C)</div></div><div class="scenario-desc">15 FM admins, 12 programs, $50M+, SSO, capital calls</div>
 <table class="cost-table">
-<tr><td class="label">FM Enterprise (features, est.)</td><td class="val">€3,500/mo</td></tr>
-<tr><td class="label">15 admin seats × €59</td><td class="val">€885/mo</td></tr>
-<tr class="total-row"><td>Total (est.)</td><td class="val">€4,385/mo · €52,620/yr</td></tr>
+<tr><td class="label">FM Enterprise (features, est.)</td><td class="val">$3,500/mo</td></tr>
+<tr><td class="label">15 FM admin seats × $25</td><td class="val">$375/mo</td></tr>
+<tr class="total-row"><td>Total (est.)</td><td class="val">$3,875/mo · $46,500/yr</td></tr>
 </table>
-<div class="meta"><b>vs.</b> Fluxx mid $36.5K–$267K + $23K–$54K impl. SmartSimple $50K–$200K + impl. AA provides full lifecycle + capital calls at a fraction of enterprise incumbents.</div></div>
+<div class="meta"><b>vs.</b> Fluxx mid $36.5K–$267K + $23K–$54K impl. SmartSimple $50K–$200K + impl. AA at a fraction of enterprise incumbents.</div></div>
 </div>
 <h3>How AA Funding Module compares to the market</h3>
 <div id="bars1"></div>
@@ -163,45 +180,48 @@
 
 <!-- ═══ S2: NEW — BUNDLE ═══ -->
 <div class="view" id="v2">
-<div class="note"><b>Scenario 2 — New customer, Funding Module + AA bundle.</b> ATS + Funding Module = full GMS. The AA bundle covers their platform plan + seats. The FM is a feature unlock on top.</div>
-<h3>Step 1: Choose an AA bundle (includes platform seats)</h3>
+<div class="note"><b>Scenario 2 — New customer, Funding Module + AA bundle (full GMS).</b> They buy an AA platform plan (EUR) for ATS/mentoring/community + the FM (USD) for funding. Two seat types: platform seats (€59/mo) for AA modules, FM admin seats ($25/mo) for funding environment. Users who need both environments pay both seat types.</div>
+<h3>Step 1: Choose an AA platform bundle (EUR — includes platform seats)</h3>
 <div class="grid3" style="margin-bottom:28px">
-<div class="card top-gray"><div class="tier-label">AA Launch</div><div class="price">€419<span class="price-unit">/mo</span></div><div class="price-sub">2 admins included · 3 programs</div><div class="fl"><div class="fl-row">Application · Community · Program · Mentoring</div></div></div>
-<div class="card top-gray"><div class="tier-label">AA Essentials</div><div class="price">€549<span class="price-unit">/mo</span></div><div class="price-sub">2 admins included · 4 programs</div><div class="fl"><div class="fl-row">All Tier 2 modules + Security</div></div></div>
-<div class="card top-gray"><div class="tier-label">AA Pro</div><div class="price">€749<span class="price-unit">/mo</span></div><div class="price-sub">2 admins included · 5 programs</div><div class="fl"><div class="fl-row">All Tier 3 modules + Online Learner + Security</div></div></div>
+<div class="card top-gray"><div class="tier-label">AA Launch</div><div class="price">€419<span class="price-unit">/mo</span></div><div class="price-sub">2 platform admins included · 3 programs</div><div class="fl"><div class="fl-row">Application · Community · Program · Mentoring</div></div></div>
+<div class="card top-gray"><div class="tier-label">AA Essentials</div><div class="price">€549<span class="price-unit">/mo</span></div><div class="price-sub">2 platform admins included · 4 programs</div><div class="fl"><div class="fl-row">All Tier 2 modules + Security</div></div></div>
+<div class="card top-gray"><div class="tier-label">AA Pro</div><div class="price">€749<span class="price-unit">/mo</span></div><div class="price-sub">2 platform admins included · 5 programs</div><div class="fl"><div class="fl-row">All Tier 3 modules + Online Learner + Security</div></div></div>
 </div>
-<h3>Step 2: Add the Funding Module (feature unlock — no extra seats)</h3>
+<h3>Step 2: Add the Funding Module (USD — separate FM seats)</h3>
 <div class="grid3" style="margin-bottom:28px">
-<div class="card top-purple"><div class="tier-label">+ FM Essential</div><div class="price">€299<span class="price-unit">/mo</span></div><div class="fl"><div class="fl-row">Unlocks basic grant lifecycle for your existing admins</div></div></div>
-<div class="card top-purple"><div class="tier-label">+ FM Professional</div><div class="price">€599<span class="price-unit">/mo</span></div><div class="fl"><div class="fl-row">Unlocks advanced lifecycle + compliance + audit logs</div></div></div>
-<div class="card top-purple"><div class="tier-label">+ FM Enterprise</div><div class="price">Custom</div><div class="fl"><div class="fl-row">Unlocks enterprise features + capital calls + investor tracking</div></div></div>
+<div class="card top-purple"><div class="tier-label">+ FM Essential</div><div class="price">$299<span class="price-unit">/mo</span></div><div class="price-sub">+ $25/mo per FM admin</div><div class="fl"><div class="fl-row">Unlocks basic grant lifecycle in the FM environment</div><div class="fl-row">FM admin seats grant access to FM only</div></div></div>
+<div class="card top-purple"><div class="tier-label">+ FM Professional</div><div class="price">$599<span class="price-unit">/mo</span></div><div class="price-sub">+ $25/mo per FM admin</div><div class="fl"><div class="fl-row">Unlocks advanced lifecycle + compliance + audit logs</div><div class="fl-row">FM admin seats grant access to FM only</div></div></div>
+<div class="card top-purple"><div class="tier-label">+ FM Enterprise</div><div class="price">Custom</div><div class="price-sub">Floor: $3,500/mo + $25/mo per FM admin</div><div class="fl"><div class="fl-row">Unlocks enterprise features + capital calls + investor tracking</div></div></div>
 </div>
-<h3>Cost examples — full platform (bundle + FM + seats)</h3>
+<h3>Cost examples — full platform (AA EUR + FM USD + both seat types)</h3>
 <div class="grid3" style="margin-bottom:32px">
-<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--t3)"></div><div class="scenario-title">Emerging accelerator + basic funding</div></div>
+<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--t3)"></div><div class="scenario-title">Emerging accelerator + basic funding</div></div><div class="scenario-desc">3 users need both platform + FM access</div>
 <table class="cost-table">
-<tr><td class="label">AA Launch (2 seats incl.)</td><td class="val">€419/mo</td></tr>
-<tr><td class="label">FM Essential (feature unlock)</td><td class="val">€299/mo</td></tr>
-<tr><td class="label">+1 extra seat × €59</td><td class="val">€59/mo</td></tr>
-<tr class="total-row"><td>Total (3 admins)</td><td class="val">€777/mo · €9,324/yr</td></tr>
+<tr><td class="label">AA Launch (2 platform seats incl.)</td><td class="val">€419/mo</td></tr>
+<tr><td class="label">+1 extra platform seat × €59</td><td class="val">€59/mo</td></tr>
+<tr><td class="label">FM Essential (features)</td><td class="val">$299/mo</td></tr>
+<tr><td class="label">3 FM admin seats × $25</td><td class="val">$75/mo</td></tr>
+<tr class="total-row"><td>Total (3 users, both envs.)</td><td class="val">€478 + $374/mo</td></tr>
 </table>
-<div class="meta">Full accelerator + grant lifecycle. No competitor offers this combination.</div></div>
-<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--accent)"></div><div class="scenario-title">Growth hub + pro funding (Seg B)</div></div>
+<div class="meta">Approx. ~$900/mo combined at current rates. Full accelerator + grant lifecycle — no competitor offers this.</div></div>
+<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--accent)"></div><div class="scenario-title">Growth hub + pro funding (Seg B)</div></div><div class="scenario-desc">7 users need both platform + FM access</div>
 <table class="cost-table">
-<tr><td class="label">AA Essentials (2 seats incl.)</td><td class="val">€549/mo</td></tr>
-<tr><td class="label">FM Professional (feature unlock)</td><td class="val">€599/mo</td></tr>
-<tr><td class="label">+5 extra seats × €59</td><td class="val">€295/mo</td></tr>
-<tr class="total-row"><td>Total (7 admins)</td><td class="val">€1,443/mo · €17,316/yr</td></tr>
+<tr><td class="label">AA Essentials (2 platform seats incl.)</td><td class="val">€549/mo</td></tr>
+<tr><td class="label">+5 extra platform seats × €59</td><td class="val">€295/mo</td></tr>
+<tr><td class="label">FM Professional (features)</td><td class="val">$599/mo</td></tr>
+<tr><td class="label">7 FM admin seats × $25</td><td class="val">$175/mo</td></tr>
+<tr class="total-row"><td>Total (7 users, both envs.)</td><td class="val">€844 + $774/mo</td></tr>
 </table>
-<div class="meta"><b>vs. Fluxx $25K/yr</b> (FL Sports, funding-only, no accelerator). AA gives full platform + advanced funding for 30% less.</div></div>
-<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--green)"></div><div class="scenario-title">Scale program + enterprise funding (Seg C)</div></div>
+<div class="meta"><b>vs. Fluxx $25K/yr</b> (FL Sports, funding-only, no accelerator). Even combined, AA gives full platform + advanced funding competitively.</div></div>
+<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--green)"></div><div class="scenario-title">Scale program + enterprise funding (Seg C)</div></div><div class="scenario-desc">15 users need both platform + FM access</div>
 <table class="cost-table">
-<tr><td class="label">AA Pro (2 seats incl.)</td><td class="val">€749/mo</td></tr>
-<tr><td class="label">FM Enterprise (feature unlock)</td><td class="val">~€3,500/mo</td></tr>
-<tr><td class="label">+13 extra seats × €59</td><td class="val">€767/mo</td></tr>
-<tr class="total-row"><td>Total (15 admins, est.)</td><td class="val">€5,016/mo · €60,192/yr</td></tr>
+<tr><td class="label">AA Pro (2 platform seats incl.)</td><td class="val">€749/mo</td></tr>
+<tr><td class="label">+13 extra platform seats × €59</td><td class="val">€767/mo</td></tr>
+<tr><td class="label">FM Enterprise (features, est.)</td><td class="val">$3,500/mo</td></tr>
+<tr><td class="label">15 FM admin seats × $25</td><td class="val">$375/mo</td></tr>
+<tr class="total-row"><td>Total (15 users, both envs.)</td><td class="val">€1,516 + $3,875/mo</td></tr>
 </table>
-<div class="meta"><b>vs. SmartSimple $50K–$200K/yr</b> (funding-only + $36K–$72K impl). AA delivers full platform + capital calls at SmartSimple's entry.</div></div>
+<div class="meta"><b>vs. SmartSimple $50K–$200K/yr</b> (funding-only). AA delivers full platform + capital calls. Combined ~$5,600/mo (~$67K/yr).</div></div>
 </div>
 <h3>How AA full platform compares</h3>
 <div id="bars2"></div>
@@ -209,53 +229,55 @@
 
 <!-- ═══ S3: EXISTING ADD-ON ═══ -->
 <div class="view" id="v3">
-<div class="note"><b>Scenario 3 — Existing customer, Funding Module add-on.</b> Already on AA Launch/Essentials/Pro with existing seats. Add the Funding Module with <b>35% loyalty discount</b> (internal only). Their existing seats now gain funding features — no new seats needed unless they want more.</div>
-<h3>Funding Module add-on pricing (feature unlock + 35% off)</h3>
+<div class="note"><b>Scenario 3 — Existing AA customer, adding Funding Module.</b> Already on AA Launch/Essentials/Pro with platform seats. Add the FM with <b>35% loyalty discount</b> (internal only) + FM admin seats at $25/mo. Their existing platform seats are unaffected — FM admin seats are separate, FM-environment-only access.</div>
+<h3>Funding Module add-on pricing (35% off FM tier + $25/seat)</h3>
 <div class="grid3" style="margin-bottom:28px">
-<div class="card top-gray"><div class="tier-label">FM Essential add-on</div><div style="display:flex;align-items:baseline;gap:8px"><div class="price">€195</div><div class="price-unit">/mo</div></div><div style="margin:4px 0 16px"><span class="price-strike">€299/mo</span><span class="discount">35% off</span></div><div class="price-sub">€2,340/yr · uses your existing seats</div><div class="fl"><div class="fl-row">Unlocks basic grant lifecycle for all your current admins</div><div class="fl-row">No new seats required</div><div class="fl-row">Need more admins? Standard rate: €59/mo each</div></div></div>
+<div class="card top-gray"><div class="tier-label">FM Essential add-on</div><div style="display:flex;align-items:baseline;gap:8px"><div class="price">$194</div><div class="price-unit">/mo</div></div><div style="margin:4px 0 16px"><span class="price-strike">$299/mo</span><span class="discount">35% off</span></div><div class="price-sub">$2,328/yr · + FM seats at $25/mo each</div><div class="fl"><div class="fl-row">Unlocks basic grant lifecycle in FM environment</div><div class="fl-row">FM admin seats are separate from platform seats</div><div class="fl-row">$25/mo per FM admin</div></div></div>
 
-<div class="card pop"><div class="badge">Best value</div><div class="tier-label" style="margin-top:8px">FM Professional add-on</div><div style="display:flex;align-items:baseline;gap:8px"><div class="price">€389</div><div class="price-unit">/mo</div></div><div style="margin:4px 0 16px"><span class="price-strike">€599/mo</span><span class="discount">35% off</span></div><div class="price-sub">€4,668/yr · uses your existing seats</div><div class="fl"><div class="fl-row fl-new">✦ Unlocks compliance, audit logs, amendments</div><div class="fl-row">+ Approval workflows, tranches, advanced reporting</div><div class="fl-row">All existing admins gain funding features instantly</div></div></div>
+<div class="card pop"><div class="badge">Best value</div><div class="tier-label" style="margin-top:8px">FM Professional add-on</div><div style="display:flex;align-items:baseline;gap:8px"><div class="price">$389</div><div class="price-unit">/mo</div></div><div style="margin:4px 0 16px"><span class="price-strike">$599/mo</span><span class="discount">35% off</span></div><div class="price-sub">$4,668/yr · + FM seats at $25/mo each</div><div class="fl"><div class="fl-row fl-new">✦ Unlocks compliance, audit logs, amendments</div><div class="fl-row">+ Approval workflows, tranches, advanced reporting</div><div class="fl-row">FM admin seats ($25/mo each) separate from platform seats</div></div></div>
 
-<div class="card top-green"><div class="tier-label">FM Enterprise add-on</div><div class="price">Custom</div><div class="price-sub">From €2,275/mo (35% off floor) · uses existing seats</div><div class="fl"><div class="fl-row fl-new">✦ Unlocks capital calls, investor tracking</div><div class="fl-row">+ SSO, API, data residency, custom integrations</div><div class="fl-row">Seats negotiated or at standard rate</div></div></div>
+<div class="card top-green"><div class="tier-label">FM Enterprise add-on</div><div class="price">Custom</div><div class="price-sub">From $2,275/mo (35% off floor) · + FM seats</div><div class="fl"><div class="fl-row fl-new">✦ Unlocks capital calls, investor tracking</div><div class="fl-row">+ SSO, API, data residency, custom integrations</div><div class="fl-row">FM seats at $25/mo or negotiated at volume</div></div></div>
 </div>
 
-<h3>Cost examples — existing customers adding FM (seats already paid for)</h3>
+<h3>Cost examples — existing customers adding FM (platform seats already paid for)</h3>
 <div class="grid3" style="margin-bottom:32px">
-<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--t3)"></div><div class="scenario-title">Launch customer + FM Essential</div></div><div class="scenario-desc">Already has 2 seats, wants basic funding</div>
+<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--t3)"></div><div class="scenario-title">Launch customer + FM Essential</div></div><div class="scenario-desc">Already has 2 platform seats, wants basic funding for 2 admins</div>
 <table class="cost-table">
-<tr><td class="label">Current AA Launch (2 seats)</td><td class="val">€419/mo</td></tr>
-<tr><td class="label">FM Essential (35% off)</td><td class="val">€195/mo</td></tr>
-<tr><td class="label">Existing seats gain FM features</td><td class="val">€0</td></tr>
-<tr class="total-row"><td>New total</td><td class="val">€614/mo · €7,368/yr</td></tr>
+<tr><td class="label">Current AA Launch (2 platform seats)</td><td class="val">€419/mo</td></tr>
+<tr><td class="label">FM Essential (35% off)</td><td class="val">$194/mo</td></tr>
+<tr><td class="label">2 FM admin seats × $25</td><td class="val">$50/mo</td></tr>
+<tr class="total-row"><td>New total</td><td class="val">€419 + $244/mo</td></tr>
 </table>
-<div class="meta"><b>Uplift:</b> +€195/mo (+46%). Pure feature revenue — no seat cannibalization.</div></div>
+<div class="meta"><b>Uplift:</b> +$244/mo. Platform seat revenue (€419) completely untouched. FM revenue is 100% incremental.</div></div>
 
-<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--accent)"></div><div class="scenario-title">Essentials customer + FM Professional</div></div><div class="scenario-desc">Already has 5 seats (2 incl + 3 extra), wants compliance</div>
+<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--accent)"></div><div class="scenario-title">Essentials customer + FM Professional</div></div><div class="scenario-desc">Already has 5 platform seats (2 incl + 3 extra), wants compliance for 5 FM admins</div>
 <table class="cost-table">
 <tr><td class="label">Current AA Essentials (2 seats)</td><td class="val">€549/mo</td></tr>
-<tr><td class="label">Current extra seats (3 × €59)</td><td class="val">€177/mo</td></tr>
-<tr><td class="label">FM Professional (35% off)</td><td class="val">€389/mo</td></tr>
-<tr class="total-row"><td>New total</td><td class="val">€1,115/mo · €13,380/yr</td></tr>
+<tr><td class="label">Current extra platform seats (3 × €59)</td><td class="val">€177/mo</td></tr>
+<tr><td class="label">FM Professional (35% off)</td><td class="val">$389/mo</td></tr>
+<tr><td class="label">5 FM admin seats × $25</td><td class="val">$125/mo</td></tr>
+<tr class="total-row"><td>New total</td><td class="val">€726 + $514/mo</td></tr>
 </table>
-<div class="meta"><b>Uplift:</b> +€389/mo (+54%). Seat revenue (€177/mo) fully preserved. FM revenue is 100% incremental.</div></div>
+<div class="meta"><b>Uplift:</b> +$514/mo. Platform seat revenue (€726/mo) fully preserved. FM revenue is 100% incremental — zero cannibalization.</div></div>
 
-<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--green)"></div><div class="scenario-title">Pro customer + FM Professional</div></div><div class="scenario-desc">Already has 7 seats (2 incl + 5 extra), wants full funding</div>
+<div class="scenario"><div class="scenario-head"><div class="scenario-dot" style="background:var(--green)"></div><div class="scenario-title">Pro customer + FM Professional</div></div><div class="scenario-desc">Already has 7 platform seats (2 incl + 5 extra), wants full funding for 7 FM admins</div>
 <table class="cost-table">
 <tr><td class="label">Current AA Pro (2 seats)</td><td class="val">€749/mo</td></tr>
-<tr><td class="label">Current extra seats (5 × €59)</td><td class="val">€295/mo</td></tr>
-<tr><td class="label">FM Professional (35% off)</td><td class="val">€389/mo</td></tr>
-<tr class="total-row"><td>New total</td><td class="val">€1,433/mo · €17,196/yr</td></tr>
+<tr><td class="label">Current extra platform seats (5 × €59)</td><td class="val">€295/mo</td></tr>
+<tr><td class="label">FM Professional (35% off)</td><td class="val">$389/mo</td></tr>
+<tr><td class="label">7 FM admin seats × $25</td><td class="val">$175/mo</td></tr>
+<tr class="total-row"><td>New total</td><td class="val">€1,044 + $564/mo</td></tr>
 </table>
-<div class="meta"><b>Uplift:</b> +€389/mo (+37%). Fluxx FL Sports contract was $25K/yr for funding alone. This customer gets full AA platform + funding for €17.2K.</div></div>
+<div class="meta"><b>Uplift:</b> +$564/mo. Fluxx FL Sports was $25K/yr for funding alone. This customer gets full AA platform + funding for ~$20K/yr combined.</div></div>
 </div>
 
-<h3>Revenue impact — feature unlock model</h3>
+<h3>Revenue impact — two-seat-type model</h3>
 <div class="grid3" style="margin-bottom:16px">
-<div style="background:var(--surface);border-radius:var(--r);padding:16px 18px;text-align:center"><div style="font-size:11px;color:var(--t3);margin-bottom:4px">Min FM uplift per customer</div><div style="font-size:22px;font-weight:500">€195/mo</div><div style="font-size:11px;color:var(--t3)">Pure feature revenue</div></div>
-<div style="background:var(--surface);border-radius:var(--r);padding:16px 18px;text-align:center"><div style="font-size:11px;color:var(--t3);margin-bottom:4px">Avg FM uplift per customer</div><div style="font-size:22px;font-weight:500">€389/mo</div><div style="font-size:11px;color:var(--t3)">Zero seat cannibalization</div></div>
-<div style="background:var(--surface);border-radius:var(--r);padding:16px 18px;text-align:center"><div style="font-size:11px;color:var(--t3);margin-bottom:4px">Seat revenue preserved</div><div style="font-size:22px;font-weight:500">100%</div><div style="font-size:11px;color:var(--t3)">€59/seat stays untouched</div></div>
+<div style="background:var(--surface);border-radius:var(--r);padding:16px 18px;text-align:center"><div style="font-size:11px;color:var(--t3);margin-bottom:4px">Min FM uplift per customer</div><div style="font-size:22px;font-weight:500">$244/mo</div><div style="font-size:11px;color:var(--t3)">FM tier + 2 FM seats</div></div>
+<div style="background:var(--surface);border-radius:var(--r);padding:16px 18px;text-align:center"><div style="font-size:11px;color:var(--t3);margin-bottom:4px">Avg FM uplift per customer</div><div style="font-size:22px;font-weight:500">$514/mo</div><div style="font-size:11px;color:var(--t3)">FM Pro + 5 FM seats</div></div>
+<div style="background:var(--surface);border-radius:var(--r);padding:16px 18px;text-align:center"><div style="font-size:11px;color:var(--t3);margin-bottom:4px">Platform seat revenue preserved</div><div style="font-size:22px;font-weight:500">100%</div><div style="font-size:11px;color:var(--t3)">€59/seat stays untouched</div></div>
 </div>
-<div class="note" style="border-left:3px solid var(--green)"><b>Key advantage of feature-unlock model:</b> Under the old model (10 seats bundled in FM Pro at €599), a customer with 10 seats was getting €590/mo of seat value + the entire funding module for €9. Under this model, €599/mo is 100% feature revenue. A 10-seat customer's total is €599 (FM) + €590 (seats) = €1,189/mo — double the revenue.</div>
+<div class="note" style="border-left:3px solid var(--green)"><b>Key advantage of two-seat-type model:</b> Platform seats (€59/mo) generate significant revenue. FM admin seats ($25/mo) are a separate, lower-cost entry point for the funding environment. This means FM revenue ($tier + $25/seat) is 100% incremental — no cannibalization of the €59/seat platform revenue. A 7-seat customer adds $564/mo in pure new revenue.</div>
 </div>
 
 <!-- ═══ RFP BENCHMARKS ═══ -->
@@ -283,7 +305,7 @@
 
 <!-- ═══ FEATURE MATRIX ═══ -->
 <div class="view" id="v5">
-<div class="note"><b>Feature matrix.</b> Updated: compliance → Professional+, audit logs added, capital calls + investor tracking in Enterprise. Seats are separate from all tiers. <a href="features.html">Full competitive comparison →</a></div>
+<div class="note"><b>Feature matrix.</b> Updated: compliance → Professional+, audit logs added, capital calls + investor tracking in Enterprise. Two seat types: platform (€59/mo) and FM admin ($25/mo). <a href="features.html">Full competitive comparison →</a></div>
 <div style="overflow-x:auto;margin-bottom:32px;border:.5px solid var(--brd);border-radius:var(--rl)"><table class="feat-table" style="min-width:760px"><thead><tr><th style="width:30%">Feature</th><th style="width:14%">FM Essential</th><th style="width:14%">FM Professional</th><th style="width:14%">FM Enterprise</th><th style="width:14%">AA (no FM)</th><th style="width:14%">Competitors</th></tr></thead><tbody>
 <tr><td class="cat" colspan="6">Grant lifecycle — core</td></tr>
 <tr><td>Application intake + review</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">All vendors</td></tr>
@@ -303,16 +325,17 @@
 <tr><td>SSO / SAML · API</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">All ent. tiers</td></tr>
 <tr><td>Data residency</td><td class="xx">—</td><td class="xx">—</td><td class="ck">&#10003;</td><td class="xx">—</td><td style="font-size:11px;color:var(--t2)">SmartSimple, Bonterra</td></tr>
 <tr><td class="cat" colspan="6">Pricing variables</td></tr>
-<tr><td>Admin seats</td><td colspan="3" style="text-align:center;color:var(--accent);font-weight:500">Separate: €59/mo each (all tiers)</td><td>2 incl.</td><td style="font-size:11px;color:var(--t2)">0 to unlimited</td></tr>
+<tr><td>Platform seats</td><td colspan="3" style="text-align:center;font-size:11px;color:var(--t2)">Separate: €59/mo each (AA platform plan)</td><td>2 incl.</td><td style="font-size:11px;color:var(--t2)">0 to unlimited</td></tr>
+<tr><td>FM admin seats</td><td colspan="3" style="text-align:center;color:var(--coral);font-weight:500">$25/mo each (FM environment only)</td><td>—</td><td style="font-size:11px;color:var(--t2)">N/A</td></tr>
 <tr><td>Programs</td><td>3</td><td>10</td><td>Unlimited</td><td>3–5</td><td style="font-size:11px;color:var(--t2)">1 to unlimited</td></tr>
 <tr><td>Fund cap</td><td>$2M</td><td>$20M</td><td>Unlimited</td><td>—</td><td style="font-size:11px;color:var(--t2)">Fluxx: giving volume</td></tr>
-<tr><td>Existing client discount</td><td>35%</td><td>35%</td><td>35%</td><td>—</td><td style="font-size:11px;color:var(--t2)">No competitor</td></tr>
+<tr><td>Existing client discount (on FM tier)</td><td>35%</td><td>35%</td><td>35%</td><td>—</td><td style="font-size:11px;color:var(--t2)">No competitor</td></tr>
 </tbody></table></div>
 </div>
 
 <!-- ═══ CAFI BENCHMARK ═══ -->
 <div class="view" id="v6">
-<div class="note" style="border-left:3px solid var(--purple)"><b>CAFI — Real-world pricing benchmark.</b> Parent org (LEHSFF) → 6 ESOs (incubators) → 10 startups each = 60 recipients per round. Modeled under the feature-unlock pricing.</div>
+<div class="note" style="border-left:3px solid var(--purple)"><b>CAFI — Real-world pricing benchmark.</b> Parent org (LEHSFF) → 6 ESOs (incubators) → 10 startups each = 60 recipients per round. Modeled under the two-seat-type pricing. FM-only customer (no AA platform).</div>
 
 <h3>CAFI organizational structure</h3>
 <div class="card" style="margin-bottom:24px;padding:20px">
@@ -331,30 +354,30 @@
 </div>
 </div>
 
-<h3>CAFI pricing — feature unlock model</h3>
+<h3>CAFI pricing — two-seat-type model (FM-only, all USD)</h3>
 <div class="grid2" style="margin-bottom:24px">
 <div class="card pop"><div class="badge">Best fit</div>
-<div class="tier-label" style="margin-top:8px">FM Professional + 9 seats</div>
-<div class="price">€1,130<span class="price-unit">/mo</span></div>
-<div class="price-sub">€13,560/yr</div>
+<div class="tier-label" style="margin-top:8px">FM Professional + 9 FM admin seats</div>
+<div class="price">$824<span class="price-unit">/mo</span></div>
+<div class="price-sub">$9,888/yr</div>
 <table class="cost-table" style="margin-top:12px">
-<tr><td class="label">FM Professional (features)</td><td class="val">€599/mo</td></tr>
-<tr><td class="label">9 admin seats × €59</td><td class="val">€531/mo</td></tr>
+<tr><td class="label">FM Professional (features)</td><td class="val">$599/mo</td></tr>
+<tr><td class="label">9 FM admin seats × $25</td><td class="val">$225/mo</td></tr>
 <tr><td class="label">6 programs (within 10 cap)</td><td class="val">Included</td></tr>
 <tr><td class="label">1 round (within 5 cap)</td><td class="val">Included</td></tr>
-<tr class="total-row"><td>Total</td><td class="val">€1,130/mo · €13,560/yr</td></tr>
+<tr class="total-row"><td>Total</td><td class="val">$824/mo · $9,888/yr</td></tr>
 </table>
-<div class="meta">If existing client (35% off FM): €389 + €531 = <b>€920/mo · €11,040/yr</b></div>
+<div class="meta">If existing client (35% off FM): $389 + $225 = <b>$614/mo · $7,368/yr</b></div>
 </div>
 
 <div class="card">
 <div class="tier-label">Revenue breakdown</div>
 <div style="margin-top:12px">
-<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:.5px solid var(--brd);font-size:13px"><span style="color:var(--t2)">Feature revenue (FM Pro)</span><span style="font-weight:500;color:var(--accent)">€599/mo (53%)</span></div>
-<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:.5px solid var(--brd);font-size:13px"><span style="color:var(--t2)">Seat revenue (9 × €59)</span><span style="font-weight:500;color:var(--green)">€531/mo (47%)</span></div>
-<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:13px;font-weight:500"><span>Total CAFI monthly</span><span>€1,130/mo</span></div>
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:.5px solid var(--brd);font-size:13px"><span style="color:var(--t2)">Feature revenue (FM Pro)</span><span style="font-weight:500;color:var(--accent)">$599/mo (73%)</span></div>
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:.5px solid var(--brd);font-size:13px"><span style="color:var(--t2)">FM seat revenue (9 × $25)</span><span style="font-weight:500;color:var(--coral)">$225/mo (27%)</span></div>
+<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:13px;font-weight:500"><span>Total CAFI monthly</span><span>$824/mo</span></div>
 </div>
-<div class="meta" style="margin-top:12px"><b>Under old model</b> (10 seats bundled): €599/mo total. <b>Under feature-unlock:</b> €1,130/mo total. That's <b>+€531/mo (+89%)</b> more revenue from the same customer, with seat value fully preserved.</div>
+<div class="meta" style="margin-top:12px"><b>FM seats at $25/mo are a low-friction entry point.</b> The tier fee ($599) carries the bulk of revenue. FM seats ($225) are incremental. If CAFI also uses the AA platform, platform seats (9 × €59 = €531/mo) would be additional — completely separate revenue stream.</div>
 </div>
 </div>
 
@@ -366,7 +389,7 @@
 <div class="seg-card">1. What is CAFI's total fund under management?</div>
 <div class="seg-card">2. How many admin users — central oversight vs. each ESO?</div>
 <div class="seg-card">3. Do they need capital call management? (Would push to Enterprise)</div>
-<div class="seg-card">4. Is CAFI an existing customer? (35% discount applies to FM)</div>
+<div class="seg-card">4. Is CAFI an existing customer? (35% discount applies to FM tier)</div>
 </div>
 </div>
 
@@ -377,35 +400,35 @@ const isDk=matchMedia('(prefers-color-scheme:dark)').matches;
 const tabs=[{id:'v1',label:'S1: New — FM only'},{id:'v2',label:'S2: New — FM + AA'},{id:'v3',label:'S3: Existing — add FM'},{id:'v4',label:'RFP benchmarks'},{id:'v5',label:'Feature matrix'},{id:'v6',label:'CAFI benchmark'}];
 let cur='v1';
 function renderTabs(){const el=document.getElementById('tabs');el.innerHTML='';tabs.forEach(t=>{const b=document.createElement('button');b.textContent=t.label;b.className='tab'+(t.id===cur?' on':'');b.onclick=()=>{cur=t.id;renderTabs();document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id===cur))};el.appendChild(b)})}
-function bar(container,items,maxVal){const el=document.getElementById(container);if(!el)return;el.innerHTML='';items.forEach(it=>{const pct=Math.min((it.max/maxVal)*100,100);const pctMin=(it.min/maxVal)*100;const isAA=it.label.startsWith('AA');const c=isAA?(isDk?'#6B9AFF':'#1D4ED8'):(isDk?'#4A4A45':'#D3D1C7');const mc=isAA?(isDk?'#6B9AFF':'#1D4ED8'):'transparent';el.innerHTML+=`<div class="comp-bar"><div class="comp-bar-label"><span>${it.label}</span><span style="font-variant-numeric:tabular-nums">${it.min===it.max?'€'+it.min.toLocaleString()+'K':'€'+it.min.toLocaleString()+'K – €'+it.max.toLocaleString()+'K'}/yr</span></div><div class="comp-bar-track"><div class="comp-bar-fill" style="left:${pctMin}%;width:${pct-pctMin}%;background:${c};min-width:4px"></div>${isAA?`<div class="comp-bar-marker" style="left:${pctMin}%;background:${mc}"></div>`:''}</div></div>`})}
+function bar(container,items,maxVal){const el=document.getElementById(container);if(!el)return;el.innerHTML='';items.forEach(it=>{const pct=Math.min((it.max/maxVal)*100,100);const pctMin=(it.min/maxVal)*100;const isAA=it.label.startsWith('AA');const c=isAA?(isDk?'#6B9AFF':'#1D4ED8'):(isDk?'#4A4A45':'#D3D1C7');const mc=isAA?(isDk?'#6B9AFF':'#1D4ED8'):'transparent';el.innerHTML+=`<div class="comp-bar"><div class="comp-bar-label"><span>${it.label}</span><span style="font-variant-numeric:tabular-nums">${it.min===it.max?'$'+it.min.toLocaleString()+'K':'$'+it.min.toLocaleString()+'K – $'+it.max.toLocaleString()+'K'}/yr</span></div><div class="comp-bar-track"><div class="comp-bar-fill" style="left:${pctMin}%;width:${pct-pctMin}%;background:${c};min-width:4px"></div>${isAA?`<div class="comp-bar-marker" style="left:${pctMin}%;background:${mc}"></div>`:''}</div></div>`})}
 renderTabs();
 bar('bars1',[
 {label:'Dealum',min:1.4,max:8.6},
 {label:'Good Grants',min:3.5,max:6.9},
-{label:'AA FM Essential (3 seats)',min:5.7,max:5.7},
+{label:'AA FM Essential (3 FM seats)',min:4.5,max:4.5},
 {label:'WizeHive',min:1.3,max:9.8},
 {label:'Foundant GLM',min:3.9,max:8.8},
-{label:'AA FM Pro (7 seats)',min:12.1,max:12.1},
+{label:'AA FM Pro (7 FM seats)',min:9.3,max:9.3},
 {label:'SM Apply',min:6.5,max:16.6},
 {label:'Submittable',min:4.4,max:16.6},
 {label:'Fluxx (small)',min:12.5,max:32.8},
-{label:'AA FM Enterprise (15 seats)',min:52.6,max:52.6},
+{label:'AA FM Enterprise (15 FM seats)',min:46.5,max:46.5},
 {label:'SmartSimple',min:46.2,max:185},
 {label:'Fluxx (mid-size)',min:33.7,max:247}
 ],260);
 bar('bars2',[
 {label:'Dealum Pro (no funding)',min:4.3,max:8},
-{label:'AA Launch + FM Ess (3 seats)',min:9.3,max:9.3},
+{label:'AA Launch + FM Ess (3 users)',min:10.8,max:10.8},
 {label:'Submittable (funding-only)',min:4.4,max:16.6},
-{label:'AA Essentials + FM Pro (7 seats)',min:17.3,max:17.3},
+{label:'AA Essentials + FM Pro (7 users)',min:19.4,max:19.4},
 {label:'Fluxx (FL Sports)',min:23.1,max:23.1},
-{label:'AA Pro + FM Ent (15 seats)',min:60.2,max:60.2},
+{label:'AA Pro + FM Ent (15 users)',min:67,max:67},
 {label:'SmartSimple',min:46.2,max:185},
 {label:'Fluxx mid-size',min:33.7,max:247}
 ],260);
 bar('barsCafi',[
-{label:'AA FM Pro + 9 seats (CAFI)',min:13.6,max:13.6},
-{label:'AA FM Pro + 9 seats (35% off)',min:11,max:11},
+{label:'AA FM Pro + 9 FM seats (CAFI)',min:9.9,max:9.9},
+{label:'AA FM Pro + 9 seats (35% off)',min:7.4,max:7.4},
 {label:'Good Grants Premium',min:7.5,max:7.5},
 {label:'Foundant GLM',min:3.9,max:8.8},
 {label:'WizeHive (6 programs)',min:4.5,max:10.6},
